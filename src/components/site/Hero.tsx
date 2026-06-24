@@ -230,8 +230,8 @@ function SkillColumn({
   side: "left" | "right";
   label: string;
 }) {
-  const ITEM_H = 40; // px per row
-  const VISIBLE = 5; // visible rows
+  const ITEM_H = 44; // px per row
+  const VISIBLE = 9; // visible rows (taller column)
   const COL_H = ITEM_H * VISIBLE;
   const CENTER = Math.floor(VISIBLE / 2); // slot index of highlight
 
