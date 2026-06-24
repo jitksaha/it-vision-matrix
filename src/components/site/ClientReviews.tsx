@@ -87,8 +87,9 @@ const notes: Note[] = [
     q: "Built our internal operations dashboard with real-time charts and drill-downs.",
     date: "Mar 18, 2026",
     tone: "white",
-    top: "78%",
-    right: "12%",
+    top: "80%",
+    left: "2%",
+
     rotate: 2,
     width: "17rem",
     hideOn: "sm",
