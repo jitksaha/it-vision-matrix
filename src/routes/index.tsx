@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { Hero } from "@/components/site/Hero";
+import { TrustedBy } from "@/components/site/TrustedBy";
 import { CareerTimeline } from "@/components/site/CareerTimeline";
 import { ExpertiseBento } from "@/components/site/ExpertiseBento";
 import { ImpactDashboard } from "@/components/site/ImpactDashboard";
