@@ -47,7 +47,7 @@ export function CareerTimeline() {
               }`}
             >
               <div
-                className={`absolute top-6 hidden h-3 w-3 rounded-full bg-white shadow-[0_0_0_4px_oklch(0.13_0.012_260),0_0_24px_oklch(0.78_0.16_220/0.7)] md:block ${
+                className={`absolute top-6 hidden h-3 w-3 rounded-full bg-foreground shadow-[0_0_0_4px_var(--background),0_0_24px_rgba(59,130,246,0.5)] md:block ${
                   i % 2 === 0 ? "right-[-6px]" : "left-[-6px]"
                 }`}
               />

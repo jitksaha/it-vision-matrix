@@ -29,14 +29,14 @@ export function Nav() {
     >
       <nav
         className={`flex w-full max-w-5xl items-center justify-between rounded-full border px-4 py-2 transition-all ${
-          scrolled ? "glass-strong border-white/10" : "border-transparent"
+          scrolled ? "glass-strong" : "border-transparent bg-background/60 backdrop-blur"
         }`}
       >
         <a href="#top" className="flex items-center gap-2.5">
-          <span className="grid h-8 w-8 place-items-center rounded-full bg-white text-background font-display text-sm font-bold">
+          <span className="grid h-8 w-8 place-items-center rounded-full bg-foreground text-background font-display text-sm font-bold">
             J
           </span>
-          <span className="hidden text-sm font-medium tracking-tight sm:block">
+          <span className="hidden text-sm font-semibold tracking-tight sm:block">
             Jit Kumar Saha
           </span>
         </a>
@@ -46,7 +46,7 @@ export function Nav() {
             <li key={l.href}>
               <a
                 href={l.href}
-                className="rounded-full px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-white/[0.06] hover:text-foreground"
+                className="rounded-full px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
               >
                 {l.label}
               </a>
@@ -56,9 +56,9 @@ export function Nav() {
 
         <a
           href="#contact"
-          className="hidden rounded-full bg-white px-4 py-2 text-xs font-medium text-background transition-opacity hover:opacity-90 md:inline-flex"
+          className="hidden rounded-full bg-foreground px-4 py-2 text-xs font-medium text-background transition-opacity hover:opacity-90 md:inline-flex"
         >
-          Let's talk
+          Let's talk →
         </a>
 
         <button
@@ -87,7 +87,7 @@ export function Nav() {
                   <a
                     href={l.href}
                     onClick={() => setOpen(false)}
-                    className="block rounded-xl px-4 py-3 text-sm text-foreground hover:bg-white/[0.06]"
+                    className="block rounded-xl px-4 py-3 text-sm text-foreground hover:bg-secondary"
                   >
                     {l.label}
                   </a>

@@ -36,7 +36,7 @@ export function Education() {
                 transition={{ duration: 0.5, delay: i * 0.05 }}
                 className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 rounded-2xl glass p-5 sm:gap-6"
               >
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/[0.05]">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-secondary">
                   <Icon className="h-4 w-4" />
                 </span>
                 <div className="min-w-0">

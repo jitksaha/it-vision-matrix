@@ -35,7 +35,7 @@ export function AIExpertise() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.4, delay: i * 0.03 }}
-              className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-foreground backdrop-blur-md transition-colors hover:border-white/20 hover:bg-white/[0.08]"
+              className="rounded-full border border-border bg-secondary px-4 py-2 text-sm text-foreground backdrop-blur-md transition-colors hover:border-foreground/20 hover:bg-secondary"
             >
               {s}
             </motion.span>

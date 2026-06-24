@@ -132,7 +132,7 @@ export function ExperienceShowcase() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.5, delay: i * 0.04 }}
-              className="group relative overflow-hidden rounded-3xl glass p-6 text-left transition-all hover:bg-white/[0.06]"
+              className="group relative overflow-hidden rounded-3xl glass p-6 text-left transition-all hover:bg-secondary"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
@@ -171,7 +171,7 @@ export function ExperienceShowcase() {
             >
               <button
                 onClick={() => setOpen(null)}
-                className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full glass hover:bg-white/10"
+                className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full glass hover:bg-secondary"
                 aria-label="Close"
               >
                 <X className="h-4 w-4" />
@@ -186,7 +186,7 @@ export function ExperienceShowcase() {
               <Block title="Responsibilities" items={open.responsibilities} />
               <Block title="Achievements" items={open.achievements} />
 
-              <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+              <div className="mt-6 rounded-2xl border border-border bg-card p-4">
                 <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                   Business impact
                 </p>
@@ -209,7 +209,7 @@ function Block({ title, items }: { title: string; items: string[] }) {
       <ul className="mt-3 space-y-2">
         {items.map((it) => (
           <li key={it} className="flex gap-3 text-sm text-foreground">
-            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-white/60" />
+            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground/60" />
             <span className="text-muted-foreground">{it}</span>
           </li>
         ))}

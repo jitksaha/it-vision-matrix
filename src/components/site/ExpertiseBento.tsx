@@ -48,7 +48,7 @@ export function ExpertiseBento() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.5, delay: (i % 6) * 0.04 }}
-              className={`group relative overflow-hidden rounded-3xl glass p-6 transition-all hover:bg-white/[0.06] ${span}`}
+              className={`group relative overflow-hidden rounded-3xl glass p-6 transition-all hover:bg-secondary ${span}`}
             >
               <div
                 className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100"
