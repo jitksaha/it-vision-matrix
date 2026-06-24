@@ -65,24 +65,25 @@
   --destructive-foreground: #ffffff;
   --border: rgba(11, 18, 32, 0.08);
   --input: rgba(11, 18, 32, 0.12);
-  --ring: #3b82f6;
+  --ring: #635bff;
 
   --surface: rgba(255, 255, 255, 0.7);
   --surface-2: rgba(255, 255, 255, 0.92);
   --hairline: rgba(11, 18, 32, 0.08);
 
-  /* Bright pill accents (UI-Bakery style) */
-  --brand: #3b82f6;       /* blue */
+  /* Bright pill accents (brand-led) */
+  --brand: #635bff;       /* primary brand */
   --brand-2: #8b5cf6;     /* violet */
   --brand-3: #10b981;     /* emerald */
   --brand-4: #f97316;     /* orange */
   --brand-5: #ec4899;     /* pink */
 
-  --gradient-brand: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  --gradient-brand: linear-gradient(135deg, #635bff 0%, #8b5cf6 100%);
   --gradient-soft: linear-gradient(180deg, #ffffff 0%, #eef2f7 100%);
-  --glow-brand: 0 30px 80px -30px rgba(59, 130, 246, 0.35);
+  --glow-brand: 0 30px 80px -30px rgba(99, 91, 255, 0.4);
   --shadow-elevated: 0 1px 0 rgba(11, 18, 32, 0.04), 0 20px 50px -20px rgba(11, 18, 32, 0.18);
   --shadow-card: 0 1px 0 rgba(11, 18, 32, 0.04), 0 8px 24px -12px rgba(11, 18, 32, 0.12);
+
 }
 
 @layer base {
@@ -110,9 +111,10 @@
   }
 
   ::selection {
-    background: rgba(59, 130, 246, 0.25);
+    background: rgba(99, 91, 255, 0.25);
     color: #0b1220;
   }
+
 }
 
 @utility glass {
@@ -163,10 +165,11 @@
 
 /* Colorful pill chips */
 @utility chip-blue {
-  background: rgba(59, 130, 246, 0.12);
-  color: #1d4ed8;
-  border: 1px solid rgba(59, 130, 246, 0.25);
+  background: rgba(99, 91, 255, 0.12);
+  color: #4f46e5;
+  border: 1px solid rgba(99, 91, 255, 0.25);
 }
+
 @utility chip-violet {
   background: rgba(139, 92, 246, 0.12);
   color: #6d28d9;
