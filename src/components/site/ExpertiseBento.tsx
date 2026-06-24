@@ -36,9 +36,12 @@ export function ExpertiseBento() {
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeader
           eyebrow="Expertise"
+          index="03"
           title="A modern operator's toolkit."
+          accent="toolkit"
           description="Twelve disciplines that compound — strategy, product, AI, and the operations that turn ideas into outcomes."
         />
+
 
         <div className="mt-16 grid auto-rows-[160px] grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
           {cards.map(({ icon: Icon, t, d, span }, i) => (
