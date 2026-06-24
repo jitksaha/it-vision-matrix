@@ -24,7 +24,7 @@ export function CareerTimeline() {
             <GitBranch className="h-3.5 w-3.5" />
             Career Evolution
           </span>
-          <h2 className="mt-5 text-3xl font-black leading-[1.05] tracking-[-0.035em] text-foreground sm:text-4xl lg:text-[44px]">
+          <h2 className="mt-5 text-3xl font-black leading-[1.35] tracking-[-0.035em] text-foreground sm:text-4xl lg:text-[44px]">
             From shipping code to shaping companies.{" "}
             <span className="rounded-sm bg-[#d0d1ff] px-1.5 text-muted-foreground box-decoration-clone">
               Eight chapters, 2019 — 2026.
