@@ -55,6 +55,7 @@ function Index() {
       <Industries />
       <Education />
       <ThoughtLeadership />
+      <ClientReviews />
       <Contact />
     </main>
   );
