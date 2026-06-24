@@ -18,64 +18,86 @@ const steps = [
 export function CareerTimeline() {
   return (
     <section className="relative py-24">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-7xl px-6">
         <SectionHeader
           eyebrow="Career Evolution"
           index="02"
-          meta="2019 — Present"
+          meta="2019 — 2026"
           title="From shipping code to shaping companies."
           accent="shaping companies"
           description="Eight chapters. One throughline — building things people use and businesses people trust."
         />
 
-        {/* Editorial left-rail timeline */}
-        <div className="relative mt-12">
-          {/* Rail */}
-          <div
-            aria-hidden
-            className="absolute left-[88px] top-2 bottom-2 w-px bg-gradient-to-b from-brand/0 via-brand/30 to-brand/0 sm:left-[112px]"
-          />
+        {/* Horizontal track */}
+        <div className="relative mt-16">
+          {/* Track line with progress */}
+          <div className="relative h-px w-full bg-border">
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 1.6, ease: "easeOut" }}
+              style={{ originX: 0 }}
+              className="absolute inset-0 h-px bg-gradient-to-r from-brand via-brand to-brand/0"
+            />
+          </div>
 
-          <ol className="space-y-4">
-            {steps.map((s, i) => (
-              <motion.li
-                key={s.t}
-                initial={{ opacity: 0, x: -12 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 0.45, delay: i * 0.04 }}
-                className="group relative grid grid-cols-[72px_1fr] items-center gap-6 sm:grid-cols-[96px_1fr] sm:gap-8"
-              >
-                {/* Year column — serif italic, brand */}
-                <div
-                  className="text-right text-2xl italic leading-none text-brand sm:text-3xl"
-                  style={{ fontFamily: SERIF }}
+          {/* Step grid */}
+          <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-4 lg:grid-cols-8">
+            {steps.map((s, i) => {
+              const top = i % 2 === 0;
+              return (
+                <motion.div
+                  key={s.t}
+                  initial={{ opacity: 0, y: top ? -12 : 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-10%" }}
+                  transition={{ duration: 0.5, delay: i * 0.05 }}
+                  className={`group relative flex flex-col ${
+                    top ? "lg:-mt-44" : "lg:mt-6"
+                  }`}
                 >
-                  {s.y}
-                </div>
+                  {/* Connector + node */}
+                  <div
+                    className={`relative hidden lg:flex ${
+                      top ? "order-2 mt-3 flex-col items-center" : "order-1 mb-3 flex-col-reverse items-center"
+                    }`}
+                  >
+                    <span className="h-10 w-px bg-border" />
+                    <span className="h-3 w-3 rounded-full bg-brand ring-4 ring-background transition-transform duration-200 group-hover:scale-125" />
+                  </div>
 
-                {/* Node + card */}
-                <div className="relative">
-                  {/* Node */}
-                  <span
-                    aria-hidden
-                    className="absolute -left-[26px] top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-brand ring-4 ring-background transition-transform duration-200 group-hover:scale-125 sm:-left-[34px]"
-                  />
-                  <div className="flex flex-col gap-1 rounded-xl border border-transparent px-4 py-3 transition-all duration-200 group-hover:border-border group-hover:bg-card group-hover:shadow-[0_10px_30px_-20px_rgba(11,18,32,0.25)] sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-                    <h3 className="text-base font-semibold tracking-tight text-foreground sm:text-lg">
+                  {/* Card */}
+                  <div
+                    className={`relative rounded-2xl border border-border bg-card p-4 shadow-[0_10px_30px_-20px_rgba(11,18,32,0.18)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-brand/40 ${
+                      top ? "lg:order-1" : "lg:order-2"
+                    }`}
+                  >
+                    <div className="flex items-baseline justify-between gap-2">
+                      <span
+                        className="text-2xl italic leading-none text-brand"
+                        style={{ fontFamily: SERIF }}
+                      >
+                        {s.y}
+                      </span>
+                      <span
+                        className="text-[9px] uppercase tracking-[0.2em] text-muted-foreground"
+                        style={{ fontFamily: MONO }}
+                      >
+                        Ch.{String(i + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+                    <h3 className="mt-3 text-sm font-semibold leading-snug tracking-tight text-foreground">
                       {s.t}
                     </h3>
-                    <p
-                      className="text-xs text-muted-foreground sm:text-sm"
-                      style={{ fontFamily: MONO }}
-                    >
+                    <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
                       {s.d}
                     </p>
                   </div>
-                </div>
-              </motion.li>
-            ))}
-          </ol>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
