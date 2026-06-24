@@ -1,215 +1,178 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, Sparkles } from "lucide-react";
-import { GridBackground } from "./GridBackground";
+import { ArrowUpRight, Sparkles, Briefcase, BrainCircuit, Layers, Rocket, LineChart, Building2 } from "lucide-react";
 import { MagneticButton } from "./primitives";
 
 const stats = [
   { v: "6+", k: "Years experience" },
   { v: "50+", k: "Projects delivered" },
   { v: "20+", k: "Industries served" },
-  { v: "AI", k: "& Product leadership" },
+  { v: "AI", k: "Product leadership" },
+];
+
+const floatingTags = [
+  { label: "Business Consulting", icon: Briefcase, chip: "chip-blue", x: "6%", y: "22%", d: 0 },
+  { label: "AI Strategy", icon: BrainCircuit, chip: "chip-violet", x: "84%", y: "18%", d: 0.15 },
+  { label: "Product Leadership", icon: Layers, chip: "chip-emerald", x: "3%", y: "62%", d: 0.3 },
+  { label: "Startup Growth", icon: Rocket, chip: "chip-orange", x: "86%", y: "58%", d: 0.45 },
+  { label: "Revenue Strategy", icon: LineChart, chip: "chip-pink", x: "12%", y: "84%", d: 0.6 },
+  { label: "Executive Mgmt", icon: Building2, chip: "chip-blue", x: "78%", y: "82%", d: 0.75 },
 ];
 
 export function Hero() {
   return (
-    <section id="top" className="relative min-h-screen overflow-hidden pt-32 pb-20">
-      <GridBackground />
+    <section id="top" className="relative overflow-hidden pt-36 pb-24">
+      {/* Grid background */}
+      <div className="pointer-events-none absolute inset-0 grid-bg-dense radial-fade opacity-90" />
+      {/* Soft color bloom */}
+      <div
+        className="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[1100px] -translate-x-1/2 rounded-full blur-3xl"
+        style={{
+          background:
+            "radial-gradient(circle at 30% 40%, rgba(59,130,246,0.18), transparent 60%), radial-gradient(circle at 70% 60%, rgba(139,92,246,0.18), transparent 60%)",
+        }}
+      />
 
-      <div className="relative mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
-        <div>
+      {/* Floating topic chips (desktop) */}
+      {floatingTags.map((t) => (
+        <motion.div
+          key={t.label}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 + t.d }}
+          style={{ left: t.x, top: t.y }}
+          className="pointer-events-none absolute hidden lg:block"
+        >
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 rounded-full glass px-3 py-1.5 text-xs text-muted-foreground"
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 5 + t.d * 2, repeat: Infinity, ease: "easeInOut" }}
+            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium shadow-sm ${t.chip}`}
           >
-            <span className="relative grid h-1.5 w-1.5 place-items-center">
-              <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400/60" />
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            </span>
-            Available for advisory & consulting · 2026
+            <t.icon className="h-3.5 w-3.5" />
+            {t.label}
           </motion.div>
+        </motion.div>
+      ))}
 
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.05 }}
-            className="mt-6 text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl"
-          >
-            Building businesses through{" "}
-            <span className="text-gradient">strategy, products &amp; AI.</span>
-          </motion.h1>
+      <div className="relative mx-auto max-w-5xl px-6 text-center">
+        {/* Eyebrow pill */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mx-auto inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs text-muted-foreground shadow-sm"
+        >
+          <span className="relative grid h-1.5 w-1.5 place-items-center">
+            <span className="absolute inset-0 animate-ping rounded-full bg-emerald-500/60" />
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+          </span>
+          Available for advisory &amp; consulting · 2026
+        </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground"
-          >
-            Business Consultant, Head of Product and AI Strategist helping organizations
-            accelerate growth through innovation, automation and digital transformation.
-          </motion.p>
+        {/* Headline — UI Bakery oversized bold */}
+        <motion.h1
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.08 }}
+          className="mt-6 text-5xl font-black leading-[1.02] tracking-tight sm:text-6xl lg:text-[88px]"
+        >
+          Building businesses
+          <br className="hidden sm:block" /> through{" "}
+          <span className="text-gradient">strategy, products &amp; AI.</span>
+        </motion.h1>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.25 }}
-            className="mt-8 flex flex-wrap items-center gap-3"
-          >
-            <MagneticButton href="#experience">
-              View experience
-              <ArrowUpRight className="ml-1.5 h-4 w-4" />
-            </MagneticButton>
-            <MagneticButton href="#contact" variant="ghost">
-              <Sparkles className="mr-1.5 h-4 w-4" />
-              Let's work together
-            </MagneticButton>
-          </motion.div>
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.18 }}
+          className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground"
+        >
+          Business Consultant, Head of Product and AI Strategist helping organizations
+          accelerate growth through innovation, automation and digital transformation.
+        </motion.p>
 
-          <motion.dl
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35 }}
-            className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-2xl glass sm:grid-cols-4"
-          >
-            {stats.map((s) => (
-              <div key={s.k} className="bg-background/40 p-5">
-                <dt className="font-display text-2xl font-semibold tracking-tight">{s.v}</dt>
-                <dd className="mt-1 text-xs text-muted-foreground">{s.k}</dd>
-              </div>
-            ))}
-          </motion.dl>
-        </div>
+        {/* Prompt-style CTA card (UI Bakery vibe) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.28 }}
+          className="relative mx-auto mt-10 max-w-2xl rounded-3xl border border-border bg-card p-2 shadow-[0_30px_60px_-30px_rgba(11,18,32,0.25)]"
+        >
+          <div className="flex items-center gap-2 rounded-2xl bg-background px-4 py-4 text-left">
+            <div className="flex-1">
+              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                Let&apos;s build
+              </p>
+              <p className="mt-0.5 text-base font-medium text-foreground/80">
+                a product, an AI strategy, a growth engine…
+              </p>
+            </div>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-foreground px-4 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90"
+            >
+              Start a conversation
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
+          </div>
+        </motion.div>
 
-        <HeroDashboard />
+        {/* Category chips like UI Bakery's Internal Tools / Admin panels row */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-5 flex flex-wrap items-center justify-center gap-2"
+        >
+          <span className="chip-blue inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium">
+            <Briefcase className="h-3.5 w-3.5" /> Consulting
+          </span>
+          <span className="chip-emerald inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium">
+            <Layers className="h-3.5 w-3.5" /> Product
+          </span>
+          <span className="chip-violet inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium">
+            <BrainCircuit className="h-3.5 w-3.5" /> AI Strategy
+          </span>
+          <span className="chip-orange inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium">
+            <Rocket className="h-3.5 w-3.5" /> Startup growth
+          </span>
+        </motion.div>
+
+        {/* Secondary CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-8 flex flex-wrap items-center justify-center gap-3"
+        >
+          <MagneticButton href="#experience">
+            View experience <ArrowUpRight className="ml-1.5 h-4 w-4" />
+          </MagneticButton>
+          <MagneticButton href="#expertise" variant="ghost">
+            <Sparkles className="mr-1.5 h-4 w-4" />
+            Explore expertise
+          </MagneticButton>
+        </motion.div>
+
+        {/* Stat grid — bento, hairline divided */}
+        <motion.dl
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mx-auto mt-16 grid max-w-4xl grid-cols-2 overflow-hidden rounded-2xl border border-border bg-card text-left shadow-sm sm:grid-cols-4"
+        >
+          {stats.map((s, i) => (
+            <div
+              key={s.k}
+              className={`p-6 ${i !== 0 ? "border-t sm:border-t-0 sm:border-l border-border" : ""} ${
+                i === 1 ? "border-t sm:border-t-0" : ""
+              }`}
+            >
+              <dt className="font-display text-3xl font-bold tracking-tight">{s.v}</dt>
+              <dd className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">{s.k}</dd>
+            </div>
+          ))}
+        </motion.dl>
       </div>
     </section>
-  );
-}
-
-function HeroDashboard() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20, scale: 0.98 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
-      className="relative"
-    >
-      <div className="relative rounded-3xl glass-strong p-5 glow-ring">
-        {/* dashboard header */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
-            <span className="h-2.5 w-2.5 rounded-full bg-amber-400/70" />
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/70" />
-          </div>
-          <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-            jks · ops console
-          </span>
-        </div>
-
-        {/* metric tiles */}
-        <div className="mt-5 grid grid-cols-2 gap-3">
-          <Tile label="Revenue growth" value="+38.2%" trend="up" />
-          <Tile label="Velocity" value="2.4×" trend="up" />
-          <Tile label="AI automations" value="17 live" trend="flat" />
-          <Tile label="Ops efficiency" value="93%" trend="up" />
-        </div>
-
-        {/* chart */}
-        <div className="mt-4 rounded-2xl border border-white/5 bg-background/40 p-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-xs text-muted-foreground">Quarterly impact</p>
-              <p className="font-display text-xl font-semibold">$4.2M tracked</p>
-            </div>
-            <span className="rounded-full bg-emerald-400/10 px-2 py-0.5 text-[10px] font-medium text-emerald-300">
-              ↑ on track
-            </span>
-          </div>
-          <Sparkline />
-        </div>
-
-        {/* footer pills */}
-        <div className="mt-4 flex flex-wrap gap-2">
-          {["Strategy", "Product", "AI", "Operations"].map((t) => (
-            <span
-              key={t}
-              className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[11px] text-muted-foreground"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* floating cards */}
-      <motion.div
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -left-4 top-16 hidden rounded-2xl glass-strong p-3 shadow-xl sm:block"
-      >
-        <p className="text-[10px] uppercase tracking-widest text-muted-foreground">Roadmap</p>
-        <p className="mt-1 font-display text-sm font-semibold">Q4 — AI agent rollout</p>
-      </motion.div>
-      <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -right-4 bottom-10 hidden rounded-2xl glass-strong p-3 shadow-xl sm:block"
-      >
-        <p className="text-[10px] uppercase tracking-widest text-muted-foreground">NPS</p>
-        <p className="mt-1 font-display text-sm font-semibold">72 · world-class</p>
-      </motion.div>
-    </motion.div>
-  );
-}
-
-function Tile({ label, value, trend }: { label: string; value: string; trend: "up" | "flat" }) {
-  return (
-    <div className="rounded-2xl border border-white/5 bg-background/40 p-3.5">
-      <p className="text-[11px] uppercase tracking-wider text-muted-foreground">{label}</p>
-      <div className="mt-1 flex items-baseline justify-between">
-        <span className="font-display text-lg font-semibold">{value}</span>
-        <span
-          className={`text-[10px] ${
-            trend === "up" ? "text-emerald-300" : "text-muted-foreground"
-          }`}
-        >
-          {trend === "up" ? "▲" : "—"}
-        </span>
-      </div>
-    </div>
-  );
-}
-
-function Sparkline() {
-  const pts = [12, 18, 14, 22, 28, 24, 34, 30, 42, 46, 52, 60];
-  const w = 280;
-  const h = 64;
-  const max = Math.max(...pts);
-  const step = w / (pts.length - 1);
-  const d = pts
-    .map((p, i) => `${i === 0 ? "M" : "L"} ${i * step} ${h - (p / max) * h}`)
-    .join(" ");
-  return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="mt-3 h-16 w-full">
-      <defs>
-        <linearGradient id="sp" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stopColor="oklch(0.78 0.16 220)" stopOpacity="0.6" />
-          <stop offset="100%" stopColor="oklch(0.78 0.16 220)" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <path d={`${d} L ${w} ${h} L 0 ${h} Z`} fill="url(#sp)" />
-      <motion.path
-        d={d}
-        fill="none"
-        stroke="oklch(0.85 0.14 220)"
-        strokeWidth="2"
-        strokeLinecap="round"
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={{ duration: 1.6, delay: 0.6, ease: "easeOut" }}
-      />
-    </svg>
   );
 }
