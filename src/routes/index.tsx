@@ -3,6 +3,7 @@ import { Nav } from "@/components/site/Nav";
 import { Hero } from "@/components/site/Hero";
 import { TrustedBy } from "@/components/site/TrustedBy";
 import { OnePlatform } from "@/components/site/OnePlatform";
+import { AISkills } from "@/components/site/AISkills";
 import { CareerTimeline } from "@/components/site/CareerTimeline";
 import { ExpertiseBento } from "@/components/site/ExpertiseBento";
 import { ImpactDashboard } from "@/components/site/ImpactDashboard";
@@ -43,6 +44,7 @@ function Index() {
       <TrustedBy />
       <OnePlatform />
       <CareerTimeline />
+      <AISkills />
       <ExpertiseBento />
       <ImpactDashboard />
       <LeadershipQuote />
