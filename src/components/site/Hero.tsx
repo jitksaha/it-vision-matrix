@@ -134,27 +134,15 @@ export function Hero() {
             }}
             placeholder="Ask me anything about strategy, product or AI…"
             rows={2}
-            className="block w-full resize-none bg-transparent px-5 pt-4 pb-3 text-base text-foreground placeholder:text-muted-foreground/70 focus:outline-none"
+            className="block w-full resize-none bg-transparent px-5 pt-5 pb-16 text-base text-foreground placeholder:text-muted-foreground/70 focus:outline-none"
           />
-
-          {/* Divider — faded edges, full color center */}
-          <div
-            className="h-px w-full"
-            style={{
-              background:
-                "linear-gradient(to right, transparent 0%, rgba(11,18,32,0.06) 20%, rgba(59,130,246,0.9) 50%, rgba(11,18,32,0.06) 80%, transparent 100%)",
-            }}
-          />
-
-          <div className="flex items-center justify-end px-3 py-2.5">
-            <button
-              type="submit"
-              className="inline-flex items-center gap-1.5 rounded-xl bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90"
-            >
-              Ask Jit
-              <ArrowUp className="h-3.5 w-3.5" />
-            </button>
-          </div>
+          <button
+            type="submit"
+            className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-xl bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90"
+          >
+            Ask Jit
+            <ArrowUp className="h-3.5 w-3.5" />
+          </button>
 
           {submitted && (
             <motion.div
