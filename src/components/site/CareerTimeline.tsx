@@ -17,7 +17,7 @@ const steps = [
 
 export function CareerTimeline() {
   return (
-    <section className="relative py-24">
+    <section className="relative py-20">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeader
           eyebrow="Career Evolution"
@@ -28,75 +28,83 @@ export function CareerTimeline() {
           description="Eight chapters. One throughline — building things people use and businesses people trust."
         />
 
-        {/* Horizontal track */}
-        <div className="relative mt-16">
-          {/* Track line with progress */}
-          <div className="relative h-px w-full bg-border">
-            <motion.div
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 1.6, ease: "easeOut" }}
-              style={{ originX: 0 }}
-              className="absolute inset-0 h-px bg-gradient-to-r from-brand via-brand to-brand/0"
-            />
+        {/* Rail */}
+        <div className="relative mt-14">
+          {/* Year ruler */}
+          <div className="hidden lg:grid grid-cols-8 px-2">
+            {steps.map((s) => (
+              <div key={s.y} className="flex flex-col items-center">
+                <span
+                  className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground"
+                  style={{ fontFamily: MONO }}
+                >
+                  {s.y}
+                </span>
+              </div>
+            ))}
           </div>
 
-          {/* Step grid */}
-          <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-4 lg:grid-cols-8">
-            {steps.map((s, i) => {
-              const top = i % 2 === 0;
-              return (
-                <motion.div
-                  key={s.t}
-                  initial={{ opacity: 0, y: top ? -12 : 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-10%" }}
-                  transition={{ duration: 0.5, delay: i * 0.05 }}
-                  className={`group relative flex flex-col ${
-                    top ? "lg:-mt-44" : "lg:mt-6"
-                  }`}
-                >
-                  {/* Connector + node */}
-                  <div
-                    className={`relative hidden lg:flex ${
-                      top ? "order-2 mt-3 flex-col items-center" : "order-1 mb-3 flex-col-reverse items-center"
-                    }`}
-                  >
-                    <span className="h-10 w-px bg-border" />
-                    <span className="h-3 w-3 rounded-full bg-brand ring-4 ring-background transition-transform duration-200 group-hover:scale-125" />
-                  </div>
+          {/* Track with nodes */}
+          <div className="relative mt-3 hidden lg:block">
+            <div className="relative h-px w-full bg-border">
+              <motion.div
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 1.6, ease: "easeOut" }}
+                style={{ originX: 0 }}
+                className="absolute inset-0 h-px bg-gradient-to-r from-brand via-brand/70 to-brand/0"
+              />
+            </div>
+            <div className="absolute inset-0 grid grid-cols-8">
+              {steps.map((s, i) => (
+                <div key={s.t} className="flex justify-center">
+                  <motion.span
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true, margin: "-10%" }}
+                    transition={{ duration: 0.3, delay: 0.1 + i * 0.08 }}
+                    className="-mt-[5px] h-[11px] w-[11px] rounded-full bg-brand ring-4 ring-background"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
 
-                  {/* Card */}
-                  <div
-                    className={`relative rounded-2xl border border-border bg-card p-4 shadow-[0_10px_30px_-20px_rgba(11,18,32,0.18)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-brand/40 ${
-                      top ? "lg:order-1" : "lg:order-2"
-                    }`}
+          {/* Cards */}
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8">
+            {steps.map((s, i) => (
+              <motion.article
+                key={s.t}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.45, delay: i * 0.04 }}
+                className="group relative flex flex-col rounded-xl border border-border/60 bg-card/60 p-4 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/50 hover:bg-card hover:shadow-[0_20px_40px_-24px_rgba(79,70,229,0.35)]"
+              >
+                <div className="flex items-baseline justify-between">
+                  <span
+                    className="text-3xl italic leading-none text-brand"
+                    style={{ fontFamily: SERIF }}
                   >
-                    <div className="flex items-baseline justify-between gap-2">
-                      <span
-                        className="text-2xl italic leading-none text-brand"
-                        style={{ fontFamily: SERIF }}
-                      >
-                        {s.y}
-                      </span>
-                      <span
-                        className="text-[9px] uppercase tracking-[0.2em] text-muted-foreground"
-                        style={{ fontFamily: MONO }}
-                      >
-                        Ch.{String(i + 1).padStart(2, "0")}
-                      </span>
-                    </div>
-                    <h3 className="mt-3 text-sm font-semibold leading-snug tracking-tight text-foreground">
-                      {s.t}
-                    </h3>
-                    <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
-                      {s.d}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })}
+                    {s.y}
+                  </span>
+                  <span
+                    className="text-[9px] uppercase tracking-[0.22em] text-muted-foreground/70"
+                    style={{ fontFamily: MONO }}
+                  >
+                    Ch.{String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <div className="mt-4 h-px w-8 bg-brand/40 transition-all duration-300 group-hover:w-full group-hover:bg-brand/60" />
+                <h3 className="mt-3 text-[13px] font-semibold leading-snug tracking-tight text-foreground">
+                  {s.t}
+                </h3>
+                <p className="mt-1.5 text-[11.5px] leading-relaxed text-muted-foreground">
+                  {s.d}
+                </p>
+              </motion.article>
+            ))}
           </div>
         </div>
       </div>
