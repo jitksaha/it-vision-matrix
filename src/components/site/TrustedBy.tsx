@@ -44,7 +44,7 @@ export function TrustedBy() {
       <div className="mt-10 flex w-full justify-center px-6">
         <div className="flex w-full max-w-2xl items-center justify-between gap-4 rounded-2xl border border-border bg-card px-5 py-3 shadow-[0_20px_50px_-30px_rgba(11,18,32,0.2)]">
           <p className="text-sm text-muted-foreground sm:text-base">
-            Partnered with{" "}
+            I have worked with{" "}
             <span className="font-bold text-foreground">9+ brands</span> across
             freelance platforms, agencies & SaaS
           </p>
