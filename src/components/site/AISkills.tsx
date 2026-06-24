@@ -102,7 +102,7 @@ function Tile({ tool }: { tool: Tool }) {
 
 export function AISkills() {
   return (
-    <section className="relative w-full bg-background py-24">
+    <section className="relative w-full bg-secondary/30 py-24">
       <div className="mx-auto max-w-6xl px-6">
         <div className="overflow-hidden rounded-3xl border border-border bg-gradient-to-b from-white to-[#f5f7fb] p-8 shadow-[0_30px_80px_-40px_rgba(11,18,32,0.18)] sm:p-12">
           <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-start">
