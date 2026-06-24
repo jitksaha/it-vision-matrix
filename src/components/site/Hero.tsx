@@ -105,22 +105,9 @@ export function Hero() {
         }}
       />
 
-      <ArcWords words={techArc} side="left" />
-      <ArcWords words={bizArc} side="right" />
+      <SkillColumn skills={techSkills} side="left" label="Stack" />
+      <SkillColumn skills={bizSkills} side="right" label="Business" />
 
-      {/* Horizontal chevron connector — runs across the hero through the search card */}
-      <div className="pointer-events-none absolute inset-x-0 top-[58%] hidden select-none md:flex justify-between px-6 text-muted-foreground/30">
-        <div className="flex items-center gap-2 font-mono text-xs">
-          {Array.from({ length: 10 }).map((_, i) => (
-            <span key={`l-${i}`}>›</span>
-          ))}
-        </div>
-        <div className="flex items-center gap-2 font-mono text-xs">
-          {Array.from({ length: 10 }).map((_, i) => (
-            <span key={`r-${i}`}>›</span>
-          ))}
-        </div>
-      </div>
 
       <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center">
         {/* Eyebrow */}
