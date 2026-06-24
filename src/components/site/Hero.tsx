@@ -109,7 +109,7 @@ export function Hero() {
       <SkillColumn skills={bizSkills} side="right" label="Business" />
 
 
-      <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center">
+      <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center">
         {/* Eyebrow */}
         <motion.div
           initial={{ opacity: 0, y: 6 }}
