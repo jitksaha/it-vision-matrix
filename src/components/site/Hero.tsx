@@ -105,8 +105,8 @@ export function Hero() {
         }}
       />
 
-      <SkillColumn skills={techSkills} side="left" label="Stack" />
-      <SkillColumn skills={bizSkills} side="right" label="Business" />
+      <SkillColumn skills={techSkills} side="left" />
+      <SkillColumn skills={bizSkills} side="right" />
 
 
       <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center">
