@@ -1,15 +1,15 @@
-import { Brain, ShieldCheck, Sparkles, Timer, Database, Workflow, Rocket, Target } from "lucide-react";
+import { Brain, Compass, Sparkles, Rocket, LineChart, Workflow, Users, Layers } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 
 const cards = [
-  { Icon: Database, text: "45+ data sources & APIs wired into product, ops and growth workflows." },
-  { Icon: ShieldCheck, text: "Enterprise-grade governance, SOC2-ready posture and AI safety guardrails." },
-  { Icon: Sparkles, text: "AI Development Agents that turn raw ideas into shippable apps by chatting." },
-  { Icon: Timer, text: "Days, not quarters — from 0→1 strategy to a live, revenue-ready product." },
-  { Icon: Brain, text: "RAG, agents and LLM pipelines deployed inside real business operations." },
-  { Icon: Workflow, text: "Automations that replace ops headcount and unlock 10x team leverage." },
-  { Icon: Rocket, text: "Growth engines tuned for activation, retention and durable revenue." },
-  { Icon: Target, text: "GTM strategy, positioning and pricing that compounds across launches." },
+  { Icon: Compass, text: "Business strategy & diagnosis — clear bets, sharper priorities, fewer wrong turns." },
+  { Icon: Layers, text: "Product leadership end-to-end — vision, discovery, roadmap, delivery." },
+  { Icon: Brain, text: "AI strategy that ships — from use-case mapping to production rollouts." },
+  { Icon: Sparkles, text: "Agentic workflows & MCP — turning manual ops into self-driving systems." },
+  { Icon: Workflow, text: "Operations redesign — replacing repetitive headcount with leverage." },
+  { Icon: Rocket, text: "0→1 launches in weeks — from raw idea to a live, revenue-ready product." },
+  { Icon: LineChart, text: "Growth & GTM — positioning, pricing and motions that actually compound." },
+  { Icon: Users, text: "Fractional Head of Product / AI — embedded with your team, not a deck." },
 ];
 
 export function OnePlatform() {
@@ -20,18 +20,19 @@ export function OnePlatform() {
       <div className="mx-auto max-w-5xl px-6">
         <SectionHeader
           align="center"
-          eyebrow="One Platform"
+          eyebrow="What I Do"
           index="01"
-          title="1 operator for all your business bets"
-          accent="business bets"
+          title="One operator. Every part of your bet."
+          accent="Every part"
           description={
             <>
-              Jit becomes the central force behind your business, product and AI —
-              across teams, stages and use cases.
+              I plug in as your business, product and AI partner — diagnosing the
+              real problem, designing the system, and shipping it with your team.
             </>
           }
         />
       </div>
+
 
 
       <div
