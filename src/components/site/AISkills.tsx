@@ -1,28 +1,30 @@
 import { useState } from "react";
-import { ArrowRight, Zap, Workflow, ShieldCheck, GitBranch } from "lucide-react";
+import { Zap, Workflow, ShieldCheck, GitBranch } from "lucide-react";
 
 type Tool = {
   name: string;
   slug?: string; // simple-icons slug
-  hex?: string; // brand color hex (no #)
-  initial?: string; // fallback letter
-  bg?: string; // fallback bg color
+  bg: string; // tile background (gradient or solid)
+  iconColor?: "white" | "black"; // simpleicon color
+  initial?: string; // fallback letter glyph
 };
 
+// Brand-accurate tiles. Logos from simpleicons.org (official brand marks),
+// recolored white/black for contrast against the brand background.
 const tools: Tool[] = [
-  { name: "ChatGPT", slug: "openai", hex: "10A37F" },
-  { name: "Claude", slug: "anthropic", hex: "D97757" },
-  { name: "Gemini", slug: "googlegemini", hex: "8E75B2" },
-  { name: "Perplexity", slug: "perplexity", hex: "1FB8CD" },
-  { name: "DeepSeek", slug: "deepseek", hex: "4D6BFE" },
-  { name: "Llama", slug: "meta", hex: "0467DF" },
-  { name: "Qwen", slug: "alibabacloud", hex: "FF6A00" },
-  { name: "Mistral", slug: "mistralai", hex: "FA520F" },
-  { name: "Codex", initial: "Cx", bg: "#0b1220" },
-  { name: "Claude Code", slug: "anthropic", hex: "0b1220" },
-  { name: "MCP", initial: "Mc", bg: "#6366F1" },
-  { name: "VS Code Agentic", slug: "visualstudiocode", hex: "007ACC" },
-  { name: "Antigravity", initial: "Ag", bg: "#111827" },
+  { name: "ChatGPT", slug: "openai", bg: "linear-gradient(135deg,#10A37F,#0d8a6a)", iconColor: "white" },
+  { name: "Claude", slug: "anthropic", bg: "linear-gradient(135deg,#D97757,#c25f3f)", iconColor: "white" },
+  { name: "Gemini", slug: "googlegemini", bg: "linear-gradient(135deg,#4285F4,#8E75B2)", iconColor: "white" },
+  { name: "Perplexity", slug: "perplexity", bg: "linear-gradient(135deg,#1FB8CD,#0f8a99)", iconColor: "white" },
+  { name: "DeepSeek", slug: "deepseek", bg: "linear-gradient(135deg,#4D6BFE,#3753d6)", iconColor: "white" },
+  { name: "Llama", slug: "meta", bg: "linear-gradient(135deg,#0467DF,#0353b3)", iconColor: "white" },
+  { name: "Qwen", slug: "alibabacloud", bg: "linear-gradient(135deg,#FF6A00,#e25500)", iconColor: "white" },
+  { name: "Mistral", slug: "mistralai", bg: "linear-gradient(135deg,#FA520F,#FFD800)", iconColor: "white" },
+  { name: "Codex", slug: "openai", bg: "linear-gradient(135deg,#1f2937,#0b1220)", iconColor: "white", initial: "{ }" },
+  { name: "Claude Code", slug: "anthropic", bg: "linear-gradient(135deg,#1a1a1a,#000000)", iconColor: "white" },
+  { name: "MCP", bg: "linear-gradient(135deg,#6366F1,#4338ca)", iconColor: "white", initial: "MCP" },
+  { name: "VS Code Agentic", slug: "visualstudiocode", bg: "linear-gradient(135deg,#007ACC,#0a4d80)", iconColor: "white" },
+  { name: "Antigravity", bg: "linear-gradient(135deg,#111827,#000000)", iconColor: "white", initial: "Ag" },
 ];
 
 const features = [
@@ -34,29 +36,30 @@ const features = [
 
 function Tile({ tool }: { tool: Tool }) {
   const [failed, setFailed] = useState(false);
-  const showImg = tool.slug && !failed;
+  const showImg = tool.slug && !failed && !tool.initial;
+  const iconHex = tool.iconColor === "black" ? "0b1220" : "ffffff";
 
   return (
-    <div className="group relative flex flex-col items-center">
-      <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-border bg-card shadow-sm transition-transform group-hover:-translate-y-1">
+    <div className="group relative flex flex-shrink-0 flex-col items-center">
+      <div
+        className="flex h-14 w-14 items-center justify-center rounded-[14px] shadow-[0_6px_14px_-6px_rgba(11,18,32,0.35),inset_0_1px_0_rgba(255,255,255,0.18)] ring-1 ring-black/5 transition-all duration-200 ease-out will-change-transform group-hover:-translate-y-2 group-hover:scale-[1.35] group-hover:shadow-[0_18px_30px_-10px_rgba(11,18,32,0.45)] sm:h-16 sm:w-16"
+        style={{ background: tool.bg }}
+      >
         {showImg ? (
           <img
-            src={`https://cdn.simpleicons.org/${tool.slug}/${tool.hex ?? "0b1220"}`}
+            src={`https://cdn.simpleicons.org/${tool.slug}/${iconHex}`}
             alt={tool.name}
-            className="h-8 w-8"
+            className="h-7 w-7 sm:h-8 sm:w-8"
             onError={() => setFailed(true)}
             loading="lazy"
           />
         ) : (
-          <span
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-xs font-bold text-white"
-            style={{ backgroundColor: tool.bg ?? "#0b1220" }}
-          >
+          <span className="text-sm font-black tracking-tight text-white sm:text-base">
             {tool.initial ?? tool.name.slice(0, 2)}
           </span>
         )}
       </div>
-      <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[11px] font-medium text-background opacity-0 transition-opacity group-hover:opacity-100">
+      <span className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[11px] font-medium text-background opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100">
         {tool.name}
       </span>
     </div>
@@ -67,8 +70,7 @@ export function AISkills() {
   return (
     <section className="relative w-full bg-background py-24">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-[0_30px_80px_-40px_rgba(11,18,32,0.18)] sm:p-12">
-          {/* Top: headline + feature pills */}
+        <div className="overflow-hidden rounded-3xl border border-border bg-gradient-to-b from-white to-[#f5f7fb] p-8 shadow-[0_30px_80px_-40px_rgba(11,18,32,0.18)] sm:p-12">
           <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-start">
             <div>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-[#3b82f6]/10 px-3 py-1 text-xs font-semibold text-[#2563eb]">
@@ -92,7 +94,7 @@ export function AISkills() {
               {features.map(({ label, Icon }) => (
                 <li
                   key={label}
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-xs font-medium text-foreground sm:text-sm"
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-4 py-2 text-xs font-medium text-foreground sm:text-sm"
                 >
                   <Icon className="h-3.5 w-3.5 text-muted-foreground" />
                   {label}
@@ -101,21 +103,12 @@ export function AISkills() {
             </ul>
           </div>
 
-          {/* Bottom: logo tray */}
-          <div className="mt-10 rounded-2xl bg-secondary/60 px-6 py-8">
-            <div className="flex flex-wrap items-end justify-between gap-6">
-              <div className="flex flex-1 flex-wrap items-center gap-x-4 gap-y-6">
-                {tools.map((t) => (
-                  <Tile key={t.name} tool={t} />
-                ))}
-              </div>
-              <a
-                href="#contact"
-                className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-foreground px-5 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90"
-              >
-                See full AI stack
-                <ArrowRight className="h-4 w-4" />
-              </a>
+          {/* Mac-dock style single-row tray */}
+          <div className="mt-10 rounded-2xl bg-gradient-to-b from-white/60 to-[#eef1f7] px-4 py-8 ring-1 ring-black/5 backdrop-blur">
+            <div className="flex items-end justify-center gap-2 overflow-x-auto pb-3 pt-6 sm:gap-3">
+              {tools.map((t) => (
+                <Tile key={t.name} tool={t} />
+              ))}
             </div>
           </div>
         </div>
