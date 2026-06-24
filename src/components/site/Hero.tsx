@@ -194,18 +194,6 @@ export function Hero() {
   );
 }
 
-function GradientBorder({ position }: { position: "top" | "bottom" }) {
-  return (
-    <div
-      className={`absolute ${position === "top" ? "top-0" : "bottom-0"} left-0 h-px w-full`}
-      style={{
-        background:
-          "linear-gradient(to right, transparent 0%, transparent 15%, rgba(59,130,246,0.35) 35%, rgba(139,92,246,0.4) 50%, rgba(236,72,153,0.35) 65%, transparent 85%, transparent 100%)",
-      }}
-    />
-  );
-}
-
 function ArcWords({
   words,
   side,
@@ -223,18 +211,18 @@ function ArcWords({
         <motion.span
           key={w.t}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1, y: [0, -6, 0] }}
+          animate={{ opacity: 1, y: [0, -5, 0] }}
           transition={{
             opacity: { duration: 0.8, delay: i * 0.08 },
             y: { duration: 6 + (i % 3), repeat: Infinity, ease: "easeInOut", delay: i * 0.25 },
           }}
-          className="absolute font-display text-base font-semibold tracking-tight whitespace-nowrap"
+          className="absolute font-display text-[11px] font-medium tracking-tight whitespace-nowrap"
           style={{
             left: side === "left" ? `${w.x}%` : undefined,
             right: side === "right" ? `${w.x}%` : undefined,
             top: `${w.y}%`,
             transform: `rotate(${w.r}deg)`,
-            color: "rgba(11, 18, 32, 0.18)",
+            color: "rgba(11, 18, 32, 0.32)",
           }}
         >
           {w.t}
