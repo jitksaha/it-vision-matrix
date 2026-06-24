@@ -17,10 +17,14 @@ export function CareerTimeline() {
     <section className="relative py-32">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader
-          eyebrow="Career evolution"
+          eyebrow="Career Evolution"
+          index="02"
+          meta="2019 — Present"
           title="From shipping code to shaping companies."
+          accent="shaping companies"
           description="Eight chapters. One throughline — building things people use and businesses people trust."
         />
+
 
         <div className="relative mt-20 grid gap-10 md:grid-cols-2">
           {/* center line */}
