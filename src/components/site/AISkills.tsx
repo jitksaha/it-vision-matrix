@@ -126,7 +126,7 @@ export function AISkills() {
 
           {/* Mac-dock style single-row tray — fits without scroll */}
           <div className="mt-10 overflow-visible rounded-2xl bg-gradient-to-b from-white/60 to-[#eef1f7] px-3 py-8 ring-1 ring-black/5 backdrop-blur sm:px-4">
-            <div className="flex items-end justify-center gap-1.5 pt-6 sm:gap-2">
+            <div className="flex items-end justify-center gap-3 pt-8 sm:gap-4">
               {tools.map((t) => (
                 <Tile key={t.name} tool={t} />
               ))}
