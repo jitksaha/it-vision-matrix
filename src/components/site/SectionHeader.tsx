@@ -70,7 +70,7 @@ export function SectionHeader({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.05 }}
-        className="mt-2 text-3xl font-black leading-[1.05] tracking-[-0.035em] text-foreground sm:text-4xl"
+        className="mt-5 text-3xl font-black leading-[1.05] tracking-[-0.035em] text-foreground sm:text-4xl lg:text-[44px]"
       >
         {titleNodes}
       </motion.h2>
