@@ -194,12 +194,12 @@ function ArcWords({
   words,
   side,
 }: {
-  words: { t: string; x: number; y: number; r: number }[];
+  words: { t: string; x: number; y: number; r: number; c: string }[];
   side: "left" | "right";
 }) {
   return (
     <div
-      className={`pointer-events-none absolute top-20 hidden h-[calc(100%-5rem)] w-[26%] md:block ${
+      className={`pointer-events-none absolute top-20 hidden h-[calc(100%-5rem)] w-[28%] md:block ${
         side === "left" ? "left-0" : "right-0"
       }`}
     >
@@ -212,16 +212,32 @@ function ArcWords({
             opacity: { duration: 0.8, delay: i * 0.08 },
             y: { duration: 6 + (i % 3), repeat: Infinity, ease: "easeInOut", delay: i * 0.25 },
           }}
-          className="absolute font-display text-[11px] font-medium tracking-tight whitespace-nowrap"
+          className="absolute flex items-center gap-1.5 font-display text-[11px] font-medium tracking-tight whitespace-nowrap"
           style={{
             left: side === "left" ? `${w.x}%` : undefined,
             right: side === "right" ? `${w.x}%` : undefined,
             top: `${w.y}%`,
             transform: `rotate(${w.r}deg)`,
-            color: "rgba(11, 18, 32, 0.32)",
+            color: "rgba(11, 18, 32, 0.38)",
           }}
         >
-          {w.t}
+          {side === "left" ? (
+            <>
+              <span>{w.t}</span>
+              <span
+                className="h-1.5 w-1.5 rounded-full"
+                style={{ backgroundColor: w.c, opacity: 0.55 }}
+              />
+            </>
+          ) : (
+            <>
+              <span
+                className="h-1.5 w-1.5 rounded-full"
+                style={{ backgroundColor: w.c, opacity: 0.55 }}
+              />
+              <span>{w.t}</span>
+            </>
+          )}
         </motion.span>
       ))}
     </div>
