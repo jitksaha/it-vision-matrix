@@ -91,20 +91,16 @@ export function Hero() {
           Jit Kumar Saha · Business · Product · AI
         </motion.div>
 
-        {/* Headline with gradient borders top/bottom (faded edges) */}
-        <div className="relative mt-6 w-full">
-          <GradientBorder position="top" />
-          <motion.h1
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.08 }}
-            className="mx-auto max-w-4xl py-5 text-center text-4xl font-black leading-[1.04] tracking-[-0.04em] text-foreground sm:text-5xl lg:text-[64px]"
-          >
-            Building businesses
-            <br /> that are baked to scale.
-          </motion.h1>
-          <GradientBorder position="bottom" />
-        </div>
+        {/* Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.08 }}
+          className="mx-auto mt-6 max-w-4xl text-center text-4xl font-black leading-[1.04] tracking-[-0.04em] text-foreground sm:text-5xl lg:text-[60px]"
+        >
+          Building businesses
+          <br /> that are baked to scale.
+        </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 8 }}
