@@ -91,20 +91,16 @@ export function Hero() {
           Jit Kumar Saha · Business · Product · AI
         </motion.div>
 
-        {/* Headline with gradient borders top/bottom (faded edges) */}
-        <div className="relative mt-6 w-full">
-          <GradientBorder position="top" />
-          <motion.h1
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.08 }}
-            className="mx-auto max-w-4xl py-5 text-center text-4xl font-black leading-[1.04] tracking-[-0.04em] text-foreground sm:text-5xl lg:text-[64px]"
-          >
-            Building businesses
-            <br /> that are baked to scale.
-          </motion.h1>
-          <GradientBorder position="bottom" />
-        </div>
+        {/* Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.08 }}
+          className="mx-auto mt-6 max-w-4xl text-center text-4xl font-black leading-[1.04] tracking-[-0.04em] text-foreground sm:text-5xl lg:text-[60px]"
+        >
+          Building businesses
+          <br /> that are baked to scale.
+        </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 8 }}
@@ -125,7 +121,7 @@ export function Hero() {
             e.preventDefault();
             submit();
           }}
-          className="relative mt-6 w-full max-w-2xl rounded-2xl border border-border bg-card shadow-[0_30px_60px_-30px_rgba(11,18,32,0.22)]"
+          className="relative mt-6 w-full max-w-2xl overflow-hidden rounded-2xl border border-border bg-card shadow-[0_30px_60px_-30px_rgba(11,18,32,0.22)]"
         >
           <textarea
             value={query}
@@ -138,15 +134,27 @@ export function Hero() {
             }}
             placeholder="Ask me anything about strategy, product or AI…"
             rows={2}
-            className="block w-full resize-none rounded-2xl bg-transparent px-5 pt-4 pb-14 text-base text-foreground placeholder:text-muted-foreground/70 focus:outline-none"
+            className="block w-full resize-none bg-transparent px-5 pt-4 pb-3 text-base text-foreground placeholder:text-muted-foreground/70 focus:outline-none"
           />
-          <button
-            type="submit"
-            className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-xl bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90"
-          >
-            Ask Jit
-            <ArrowUp className="h-3.5 w-3.5" />
-          </button>
+
+          {/* Divider — faded edges, full color center */}
+          <div
+            className="h-px w-full"
+            style={{
+              background:
+                "linear-gradient(to right, transparent 0%, rgba(11,18,32,0.06) 20%, rgba(59,130,246,0.9) 50%, rgba(11,18,32,0.06) 80%, transparent 100%)",
+            }}
+          />
+
+          <div className="flex items-center justify-end px-3 py-2.5">
+            <button
+              type="submit"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90"
+            >
+              Ask Jit
+              <ArrowUp className="h-3.5 w-3.5" />
+            </button>
+          </div>
 
           {submitted && (
             <motion.div
@@ -182,19 +190,16 @@ export function Hero() {
           ))}
         </motion.div>
       </div>
-    </section>
-  );
-}
 
-function GradientBorder({ position }: { position: "top" | "bottom" }) {
-  return (
-    <div
-      className={`absolute ${position === "top" ? "top-0" : "bottom-0"} left-0 h-px w-full`}
-      style={{
-        background:
-          "linear-gradient(to right, transparent 0%, transparent 15%, rgba(59,130,246,0.35) 35%, rgba(139,92,246,0.4) 50%, rgba(236,72,153,0.35) 65%, transparent 85%, transparent 100%)",
-      }}
-    />
+      {/* Section bottom border — single color, faded edges */}
+      <div
+        className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
+        style={{
+          background:
+            "linear-gradient(to right, transparent 0%, transparent 15%, rgba(11,18,32,0.18) 50%, transparent 85%, transparent 100%)",
+        }}
+      />
+    </section>
   );
 }
 
@@ -215,18 +220,18 @@ function ArcWords({
         <motion.span
           key={w.t}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1, y: [0, -6, 0] }}
+          animate={{ opacity: 1, y: [0, -5, 0] }}
           transition={{
             opacity: { duration: 0.8, delay: i * 0.08 },
             y: { duration: 6 + (i % 3), repeat: Infinity, ease: "easeInOut", delay: i * 0.25 },
           }}
-          className="absolute font-display text-base font-semibold tracking-tight whitespace-nowrap"
+          className="absolute font-display text-[11px] font-medium tracking-tight whitespace-nowrap"
           style={{
             left: side === "left" ? `${w.x}%` : undefined,
             right: side === "right" ? `${w.x}%` : undefined,
             top: `${w.y}%`,
             transform: `rotate(${w.r}deg)`,
-            color: "rgba(11, 18, 32, 0.18)",
+            color: "rgba(11, 18, 32, 0.32)",
           }}
         >
           {w.t}
