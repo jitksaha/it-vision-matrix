@@ -221,56 +221,111 @@ export function Hero() {
   );
 }
 
-function ArcWords({
-  words,
+function SkillColumn({
+  skills,
   side,
+  label,
 }: {
-  words: { t: string; x: number; y: number; r: number; c: string }[];
+  skills: Skill[];
   side: "left" | "right";
+  label: string;
 }) {
+  const ITEM_H = 40; // px per row
+  const VISIBLE = 5; // visible rows
+  const COL_H = ITEM_H * VISIBLE;
+  const CENTER = Math.floor(VISIBLE / 2); // slot index of highlight
+
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActive((i) => (i + 1) % skills.length);
+    }, 1800);
+    return () => clearInterval(id);
+  }, [skills.length]);
+
+  // Duplicate list so the wrap-around looks continuous.
+  const loop = [...skills, ...skills];
+
   return (
     <div
-      className={`pointer-events-none absolute top-20 hidden h-[calc(100%-5rem)] w-[28%] md:block ${
-        side === "left" ? "left-0" : "right-0"
+      className={`pointer-events-none absolute top-1/2 z-0 hidden -translate-y-1/2 md:block ${
+        side === "left" ? "left-4 lg:left-10" : "right-4 lg:right-10"
       }`}
+      style={{ height: COL_H, width: 200 }}
     >
-      {words.map((w, i) => (
-        <motion.span
-          key={w.t}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, y: [0, -5, 0] }}
-          transition={{
-            opacity: { duration: 0.8, delay: i * 0.08 },
-            y: { duration: 6 + (i % 3), repeat: Infinity, ease: "easeInOut", delay: i * 0.25 },
-          }}
-          className="absolute flex items-center gap-1.5 font-display text-[11px] font-medium tracking-tight whitespace-nowrap"
-          style={{
-            left: side === "left" ? `${w.x}%` : undefined,
-            right: side === "right" ? `${w.x}%` : undefined,
-            top: `${w.y}%`,
-            transform: `rotate(${w.r}deg)`,
-            color: "rgba(11, 18, 32, 0.38)",
-          }}
+      {/* tiny side label */}
+      <div
+        className={`absolute -top-6 text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground/50 ${
+          side === "left" ? "left-2" : "right-2"
+        }`}
+      >
+        {label}
+      </div>
+
+      {/* fade mask top/bottom */}
+      <div
+        className="absolute inset-0 overflow-hidden"
+        style={{
+          maskImage:
+            "linear-gradient(to bottom, transparent 0%, #000 25%, #000 75%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, transparent 0%, #000 25%, #000 75%, transparent 100%)",
+        }}
+      >
+        <motion.ul
+          animate={{ y: CENTER * ITEM_H - active * ITEM_H }}
+          transition={{ type: "spring", stiffness: 120, damping: 22 }}
+          className="absolute inset-x-0 top-0 m-0 list-none p-0"
         >
-          {side === "left" ? (
-            <>
-              <span>{w.t}</span>
-              <span
-                className="h-1.5 w-1.5 rounded-full"
-                style={{ backgroundColor: w.c, opacity: 0.55 }}
-              />
-            </>
-          ) : (
-            <>
-              <span
-                className="h-1.5 w-1.5 rounded-full"
-                style={{ backgroundColor: w.c, opacity: 0.55 }}
-              />
-              <span>{w.t}</span>
-            </>
-          )}
-        </motion.span>
-      ))}
+          {loop.map((s, i) => {
+            const isActive = i % skills.length === active;
+            const { Icon } = s;
+            return (
+              <li
+                key={`${s.t}-${i}`}
+                style={{ height: ITEM_H }}
+                className={`flex items-center ${
+                  side === "left" ? "justify-start pl-3" : "justify-end pr-3"
+                }`}
+              >
+                {isActive ? (
+                  <span
+                    className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[12px] font-medium ${
+                      side === "left" ? "flex-row" : "flex-row-reverse"
+                    }`}
+                    style={{
+                      backgroundColor: `${s.c}14`,
+                      color: s.c,
+                      boxShadow: `inset 0 0 0 1px ${s.c}33`,
+                    }}
+                  >
+                    <Icon className="h-3.5 w-3.5" style={{ color: s.c }} />
+                    <span className="whitespace-nowrap">{s.t}</span>
+                  </span>
+                ) : (
+                  <span
+                    className="whitespace-nowrap text-[11px] font-medium tracking-tight"
+                    style={{ color: "rgba(11,18,32,0.32)" }}
+                  >
+                    {s.t}
+                  </span>
+                )}
+              </li>
+            );
+          })}
+        </motion.ul>
+      </div>
+
+      {/* chevron pointer toward the search card (aligned with highlight row) */}
+      <div
+        className={`absolute top-1/2 -translate-y-1/2 select-none font-mono text-xs text-muted-foreground/30 ${
+          side === "left" ? "left-full ml-2" : "right-full mr-2"
+        }`}
+      >
+        {side === "left" ? "›››››" : "‹‹‹‹‹"}
+      </div>
     </div>
   );
 }
+
