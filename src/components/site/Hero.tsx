@@ -270,12 +270,14 @@ function SkillColumn({
         }}
       >
         <motion.ul
+          initial={false}
           animate={{ y: CENTER * ITEM_H - step * ITEM_H }}
-          transition={snap ? { duration: 0 } : { type: "spring", stiffness: 120, damping: 22 }}
+          transition={snap ? { duration: 0 } : { duration: 0.9, ease: [0.22, 0.61, 0.36, 1] }}
           onAnimationComplete={() => {
-            if (step >= skills.length) {
+            // Once we've drifted into the third copy, snap back by N silently.
+            if (step >= 2 * N) {
               setSnap(true);
-              setStep((s) => s - skills.length);
+              setStep((s) => s - N);
             }
           }}
           className="absolute inset-x-0 top-0 m-0 list-none p-0"
