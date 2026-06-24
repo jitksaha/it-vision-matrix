@@ -111,7 +111,7 @@ export function AISkills() {
                 <GitBranch className="h-3.5 w-3.5" />
                 Connect
               </span>
-              <h2 className="mt-5 text-3xl font-black leading-[1.05] tracking-[-0.035em] text-foreground sm:text-4xl lg:text-[44px]">
+              <h2 className="mt-5 text-3xl font-black leading-[1.35] tracking-[-0.035em] text-foreground sm:text-4xl lg:text-[44px]">
                 AI-native by default.{" "}
                 <span className="rounded-sm bg-[#d0d1ff] px-1.5 box-decoration-clone">
                   13+ models, agents and protocols I deploy in production.
