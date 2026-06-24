@@ -105,8 +105,8 @@ export function Hero() {
         }}
       />
 
-      <SkillColumn skills={techSkills} side="left" label="Stack" />
-      <SkillColumn skills={bizSkills} side="right" label="Business" />
+      <SkillColumn skills={techSkills} side="left" />
+      <SkillColumn skills={bizSkills} side="right" />
 
 
       <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center">
@@ -224,11 +224,9 @@ export function Hero() {
 function SkillColumn({
   skills,
   side,
-  label,
 }: {
   skills: Skill[];
   side: "left" | "right";
-  label: string;
 }) {
   const ITEM_H = 44; // px per row
   const VISIBLE = 9; // visible rows (taller column)
@@ -260,14 +258,8 @@ function SkillColumn({
       }`}
       style={{ height: COL_H, width: 220 }}
     >
-      {/* tiny side label */}
-      <div
-        className={`absolute -top-6 text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground/50 ${
-          side === "left" ? "left-2" : "right-2"
-        }`}
-      >
-        {label}
-      </div>
+
+
 
       {/* fade mask top/bottom */}
       <div
