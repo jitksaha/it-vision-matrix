@@ -1,22 +1,26 @@
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUp, Sparkles, Search } from "lucide-react";
+import { ArrowUp, Sparkles, Home, Users, Pencil, Briefcase } from "lucide-react";
 
-// Scrolling word columns — left = technology, right = business
+// Scattered floating words — left = technology, right = business
 const techWords = [
-  "GraphQL", "MySQL", "PostgreSQL", "MCP", "OpenAPI",
-  "Next.js", "React", "TypeScript", "Node.js", "Python",
-  "LangChain", "OpenAI", "Anthropic", "Vector DB", "RAG",
-  "Supabase", "Firebase", "Docker", "Kubernetes", "AWS",
-  "n8n", "Zapier", "Make", "Webhooks", "REST APIs",
+  { t: "GraphQL", x: 8, y: 8, r: -8, s: 22 },
+  { t: "MySQL", x: 14, y: 22, r: 4, s: 26 },
+  { t: "PostgreSQL", x: 4, y: 36, r: -6, s: 20 },
+  { t: "MCP", x: 16, y: 50, r: 6, s: 28 },
+  { t: "OpenAPI", x: 6, y: 64, r: -4, s: 22 },
+  { t: "LangChain", x: 12, y: 78, r: 8, s: 20 },
+  { t: "Next.js", x: 2, y: 92, r: -10, s: 18 },
 ];
 
 const bizWords = [
-  "HTTP API", "Oracle", "Snowflake", "MariaDB", "OpenAI",
-  "Strategy", "Product", "Growth", "GTM", "Revenue",
-  "Operations", "Consulting", "Leadership", "Roadmap", "OKRs",
-  "Fundraising", "B2B SaaS", "Enterprise", "Startups", "Scale-ups",
-  "Analytics", "Retention", "Pricing", "Partnerships", "M&A",
+  { t: "HTTP API", x: 8, y: 8, r: 8, s: 22 },
+  { t: "Oracle", x: 4, y: 22, r: -4, s: 26 },
+  { t: "Snowflake", x: 14, y: 36, r: 6, s: 22 },
+  { t: "OpenAI", x: 2, y: 50, r: -8, s: 24 },
+  { t: "MariaDB", x: 12, y: 64, r: 4, s: 20 },
+  { t: "Strategy", x: 6, y: 78, r: -6, s: 22 },
+  { t: "Revenue", x: 16, y: 92, r: 8, s: 18 },
 ];
 
 // Lightweight knowledge base for the "ask me anything" engine
@@ -69,11 +73,11 @@ function answerFor(q: string): string {
   return "I focus on business strategy, product leadership and AI — ask about my experience, the industries I've worked in, how I run product, or how I deploy AI in real operations.";
 }
 
-const suggestions = [
-  "AI Strategy",
-  "Product Leadership",
-  "Business Consulting",
-  "Startup Growth",
+const suggestions: { label: string; icon: typeof Home; style: string }[] = [
+  { label: "AI Strategy", icon: Home, style: "chip-blue" },
+  { label: "Product Leadership", icon: Users, style: "chip-emerald" },
+  { label: "Business Consulting", icon: Pencil, style: "chip-orange" },
+  { label: "Startup Growth", icon: Briefcase, style: "chip-violet" },
 ];
 
 export function Hero() {
@@ -90,18 +94,18 @@ export function Hero() {
 
   return (
     <section id="top" className="relative overflow-hidden pt-36 pb-28">
-      {/* Subtle radial fade */}
+      {/* Soft top wash */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(59,130,246,0.06), transparent 60%)",
+            "radial-gradient(ellipse 70% 50% at 50% 30%, rgba(59,130,246,0.05), transparent 60%)",
         }}
       />
 
-      {/* Scrolling side columns */}
-      <ScrollColumn words={techWords} side="left" />
-      <ScrollColumn words={bizWords} side="right" />
+      {/* Scattered floating words */}
+      <ScatterWords words={techWords} side="left" />
+      <ScatterWords words={bizWords} side="right" />
 
       <div className="relative mx-auto max-w-6xl px-6">
         {/* Eyebrow pill */}
@@ -110,39 +114,36 @@ export function Hero() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs text-muted-foreground shadow-sm"
+            className="inline-flex items-center gap-2.5 rounded-full border border-border bg-card px-5 py-2 text-[13px] text-foreground/80 shadow-sm"
           >
-            <span className="relative grid h-1.5 w-1.5 place-items-center">
-              <span className="absolute inset-0 animate-ping rounded-full bg-emerald-500/60" />
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            </span>
+            <span className="h-1.5 w-1.5 rounded-full bg-foreground" />
             Jit Kumar Saha · Business · Product · AI
           </motion.div>
         </div>
 
-        {/* Oversized centered headline — UI Bakery style */}
+        {/* Oversized centered headline */}
         <motion.h1
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.08 }}
-          className="mx-auto mt-8 max-w-5xl text-center text-5xl font-black leading-[1.02] tracking-tight text-foreground sm:text-6xl lg:text-[88px]"
+          className="mx-auto mt-10 max-w-5xl text-center text-5xl font-black leading-[1.02] tracking-[-0.04em] text-foreground sm:text-6xl lg:text-[92px]"
         >
           Building businesses
-          <br className="hidden sm:block" /> that are baked to scale.
+          <br /> that are baked to scale.
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.18 }}
-          className="mx-auto mt-6 max-w-2xl text-center text-base leading-relaxed text-muted-foreground sm:text-lg"
+          className="mx-auto mt-7 max-w-2xl text-center text-base leading-relaxed text-muted-foreground sm:text-lg"
         >
           Business Consultant, Head of Product and AI Strategist helping teams
           ship reliable products, real AI and growth engines — without the
           bottlenecks or fragile prototypes.
         </motion.p>
 
-        {/* Ask-me-anything prompt card */}
+        {/* Ask-me-anything prompt card — tall textarea style */}
         <motion.form
           initial={{ opacity: 0, y: 18, scale: 0.985 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -151,36 +152,34 @@ export function Hero() {
             e.preventDefault();
             submit();
           }}
-          className="relative mx-auto mt-12 max-w-3xl rounded-3xl border border-border bg-card p-4 shadow-[0_30px_60px_-30px_rgba(11,18,32,0.22)]"
+          className="relative mx-auto mt-12 max-w-3xl rounded-3xl border border-border bg-card shadow-[0_40px_80px_-40px_rgba(11,18,32,0.25)]"
         >
-          <div className="flex items-start gap-3 px-3 pt-3">
-            <Search className="mt-1 h-4 w-4 text-muted-foreground" />
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Ask me anything — AI strategy, product leadership, growth…"
-              className="flex-1 bg-transparent text-base text-foreground placeholder:text-muted-foreground/80 focus:outline-none sm:text-lg"
-            />
-          </div>
-
-          <div className="mt-4 flex items-center justify-between px-3 pb-1">
-            <p className="hidden text-xs text-muted-foreground sm:block">
-              Powered by Jit's knowledge graph
-            </p>
-            <button
-              type="submit"
-              className="ml-auto inline-flex items-center gap-1.5 rounded-xl bg-foreground px-4 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
-            >
-              Ask Jit
-              <ArrowUp className="h-4 w-4" />
-            </button>
-          </div>
+          <textarea
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                submit();
+              }
+            }}
+            placeholder="Ask me anything about strategy, product or AI…"
+            rows={4}
+            className="block w-full resize-none rounded-3xl bg-transparent px-6 pt-6 pb-20 text-lg text-foreground placeholder:text-muted-foreground/70 focus:outline-none"
+          />
+          <button
+            type="submit"
+            className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-2xl bg-foreground px-5 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90"
+          >
+            Ask Jit
+            <ArrowUp className="h-4 w-4" />
+          </button>
 
           {submitted && (
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-4 rounded-2xl border border-border bg-background p-4 text-left"
+              className="mx-4 mb-4 rounded-2xl border border-border bg-background p-4 text-left"
             >
               <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground">
                 <Sparkles className="h-3.5 w-3.5" /> Answer
@@ -192,60 +191,64 @@ export function Hero() {
           )}
         </motion.form>
 
-        {/* Suggestion chips */}
+        {/* Suggestion chips with icons */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-5 flex flex-wrap items-center justify-center gap-2"
+          className="mt-6 flex flex-wrap items-center justify-center gap-2.5"
         >
-          {suggestions.map((s, i) => {
-            const styles = ["chip-blue", "chip-emerald", "chip-violet", "chip-orange"];
-            return (
-              <button
-                key={s}
-                type="button"
-                onClick={() => submit(s)}
-                className={`${styles[i % styles.length]} inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition-transform hover:-translate-y-0.5`}
-              >
-                {s}
-              </button>
-            );
-          })}
+          {suggestions.map(({ label, icon: Icon, style }) => (
+            <button
+              key={label}
+              type="button"
+              onClick={() => submit(label)}
+              className={`${style} inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-transform hover:-translate-y-0.5`}
+            >
+              <Icon className="h-4 w-4" />
+              {label}
+            </button>
+          ))}
         </motion.div>
       </div>
     </section>
   );
 }
 
-function ScrollColumn({ words, side }: { words: string[]; side: "left" | "right" }) {
-  const doubled = [...words, ...words];
+function ScatterWords({
+  words,
+  side,
+}: {
+  words: { t: string; x: number; y: number; r: number; s: number }[];
+  side: "left" | "right";
+}) {
   return (
     <div
-      className={`pointer-events-none absolute top-0 hidden h-full w-40 md:block ${
+      className={`pointer-events-none absolute top-24 hidden h-[80%] w-[22%] md:block ${
         side === "left" ? "left-0" : "right-0"
       }`}
-      style={{
-        maskImage:
-          "linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)",
-        WebkitMaskImage:
-          "linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)",
-      }}
     >
-      <motion.div
-        animate={{ y: side === "left" ? ["0%", "-50%"] : ["-50%", "0%"] }}
-        transition={{ duration: 40, ease: "linear", repeat: Infinity }}
-        className="flex flex-col gap-6 py-8 text-center"
-      >
-        {doubled.map((w, i) => (
-          <span
-            key={`${w}-${i}`}
-            className="font-mono text-sm tracking-tight text-muted-foreground/60"
-          >
-            {w}
-          </span>
-        ))}
-      </motion.div>
+      {words.map((w, i) => (
+        <motion.span
+          key={w.t}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: [0, -8, 0] }}
+          transition={{
+            opacity: { duration: 0.8, delay: i * 0.08 },
+            y: { duration: 6 + (i % 3), repeat: Infinity, ease: "easeInOut", delay: i * 0.2 },
+          }}
+          className="absolute font-display font-semibold tracking-tight text-foreground/15 whitespace-nowrap"
+          style={{
+            left: side === "left" ? `${w.x}%` : undefined,
+            right: side === "right" ? `${w.x}%` : undefined,
+            top: `${w.y}%`,
+            transform: `rotate(${w.r}deg)`,
+            fontSize: `${w.s}px`,
+          }}
+        >
+          {w.t}
+        </motion.span>
+      ))}
     </div>
   );
 }
