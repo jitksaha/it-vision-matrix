@@ -224,11 +224,9 @@ export function Hero() {
 function SkillColumn({
   skills,
   side,
-  label,
 }: {
   skills: Skill[];
   side: "left" | "right";
-  label: string;
 }) {
   const ITEM_H = 44; // px per row
   const VISIBLE = 9; // visible rows (taller column)
