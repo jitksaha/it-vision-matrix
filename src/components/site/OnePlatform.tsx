@@ -1,4 +1,5 @@
 import { Brain, ShieldCheck, Sparkles, Timer, Database, Workflow, Rocket, Target } from "lucide-react";
+import { SectionHeader } from "./SectionHeader";
 
 const cards = [
   { Icon: Database, text: "45+ data sources & APIs wired into product, ops and growth workflows." },
@@ -16,16 +17,22 @@ export function OnePlatform() {
 
   return (
     <section className="relative w-full overflow-hidden bg-background py-24">
-      <div className="mx-auto max-w-5xl px-6 text-center">
-        <h2 className="text-4xl font-black leading-[1.05] tracking-[-0.04em] text-foreground sm:text-5xl lg:text-[64px]">
-          1 operator
-          <br />
-          for all your business bets
-        </h2>
-        <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-          Jit becomes the central force behind your business, product and AI — across teams, stages and use cases.
-        </p>
+      <div className="mx-auto max-w-5xl px-6">
+        <SectionHeader
+          align="center"
+          eyebrow="One Platform"
+          index="01"
+          title="1 operator for all your business bets"
+          accent="business bets"
+          description={
+            <>
+              Jit becomes the central force behind your business, product and AI —
+              across teams, stages and use cases.
+            </>
+          }
+        />
       </div>
+
 
       <div
         className="mt-14 relative"
