@@ -70,7 +70,7 @@ export function SectionHeader({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.05 }}
-        className="mt-5 text-3xl font-black leading-[1.05] tracking-[-0.035em] text-foreground sm:text-4xl lg:text-[44px]"
+        className="mt-5 text-3xl font-black leading-[1.35] tracking-[-0.035em] text-foreground sm:text-4xl lg:text-[44px]"
       >
         {titleNodes}
       </motion.h2>
@@ -99,10 +99,7 @@ function renderTitle(title: string, accent?: string): ReactNode {
   return (
     <>
       {title.slice(0, idx)}
-      <span
-        className="italic font-normal text-brand"
-        style={{ fontFamily: SERIF }}
-      >
+      <span className="rounded-sm bg-[#d0d1ff] px-1.5 box-decoration-clone">
         {accent}
       </span>
       {title.slice(idx + accent.length)}
