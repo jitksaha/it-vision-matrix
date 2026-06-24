@@ -1,24 +1,54 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUp, Sparkles, Home, Users, Pencil, Briefcase } from "lucide-react";
+import {
+  ArrowUp,
+  Sparkles,
+  Home,
+  Users,
+  Pencil,
+  Briefcase,
+  Database,
+  Boxes,
+  Cpu,
+  Cloud,
+  Network,
+  Code2,
+  Workflow,
+  LineChart,
+  Brain,
+  Rocket,
+  Target,
+  Layers,
+  Plug,
+  ServerCog,
+} from "lucide-react";
 
-// Words on a deep arc with a small colored brand dot — left arc bulges right, right arc bulges left.
-const techArc = [
-  { t: "GraphQL", y: 4, x: 58, r: -28, c: "#e10098" },
-  { t: "MySQL", y: 20, x: 36, r: -18, c: "#00758f" },
-  { t: "PostgreSQL", y: 38, x: 20, r: -6, c: "#336791" },
-  { t: "MCP", y: 56, x: 20, r: 6, c: "#000000" },
-  { t: "OpenAPI", y: 74, x: 36, r: 18, c: "#6ba539" },
-  { t: "LangChain", y: 92, x: 58, r: 28, c: "#1c3c3c" },
+type Skill = { t: string; c: string; Icon: typeof Home };
+
+const techSkills: Skill[] = [
+  { t: "GraphQL", c: "#e10098", Icon: Network },
+  { t: "MySQL", c: "#00758f", Icon: Database },
+  { t: "PostgreSQL", c: "#336791", Icon: Database },
+  { t: "MCP", c: "#0b1220", Icon: Plug },
+  { t: "OpenAPI", c: "#6ba539", Icon: Code2 },
+  { t: "LangChain", c: "#1c3c3c", Icon: Workflow },
+  { t: "OpenAI", c: "#10a37f", Icon: Brain },
+  { t: "Snowflake", c: "#29b5e8", Icon: Cloud },
+  { t: "Oracle", c: "#f80000", Icon: ServerCog },
+  { t: "MariaDB", c: "#003545", Icon: Database },
 ];
 
-const bizArc = [
-  { t: "HTTP API", y: 4, x: 58, r: 28, c: "#0ea5e9" },
-  { t: "Oracle", y: 20, x: 36, r: 18, c: "#f80000" },
-  { t: "Snowflake", y: 38, x: 20, r: 6, c: "#29b5e8" },
-  { t: "OpenAI", y: 56, x: 20, r: -6, c: "#10a37f" },
-  { t: "MariaDB", y: 74, x: 36, r: -18, c: "#003545" },
-  { t: "Strategy", y: 92, x: 58, r: -28, c: "#8b5cf6" },
+const bizSkills: Skill[] = [
+  { t: "AI Strategy", c: "#3b82f6", Icon: Brain },
+  { t: "Product Leadership", c: "#10b981", Icon: Boxes },
+  { t: "Growth Engines", c: "#8b5cf6", Icon: Rocket },
+  { t: "GTM Strategy", c: "#f97316", Icon: Target },
+  { t: "Operations", c: "#0ea5e9", Icon: Cpu },
+  { t: "Roadmapping", c: "#ef4444", Icon: Layers },
+  { t: "Revenue Ops", c: "#22c55e", Icon: LineChart },
+  { t: "0 → 1 Build", c: "#a855f7", Icon: Rocket },
+  { t: "Advisory", c: "#06b6d4", Icon: Workflow },
+  { t: "Scale Ops", c: "#eab308", Icon: ServerCog },
 ];
 
 const knowledge: { tags: string[]; answer: string }[] = [
