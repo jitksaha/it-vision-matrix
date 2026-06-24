@@ -39,7 +39,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <main className="relative bg-background text-foreground">
+    <main className="relative bg-[oklch(0.98_0.015_270)] text-foreground">
       <Nav />
       <Hero />
       <TrustedBy />
