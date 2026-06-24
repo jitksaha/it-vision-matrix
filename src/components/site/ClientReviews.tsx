@@ -97,12 +97,13 @@ const notes: Note[] = [
     q: "0→1 launch in 5 weeks. Strategy, product, GTM — one operator, no theatre.",
     author: "Founder, B2B SaaS",
     tone: "blue",
-    top: "82%",
-    left: "22%",
+    top: "84%",
+    right: "2%",
     rotate: -6,
-    width: "18rem",
+    width: "17rem",
     hideOn: "sm",
   },
+
 ];
 
 const toneStyles: Record<Note["tone"], string> = {
