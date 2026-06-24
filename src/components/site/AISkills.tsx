@@ -9,7 +9,7 @@ type Tool = {
 
 const tools: Tool[] = [
   { name: "ChatGPT", slug: "openai", bg: "linear-gradient(135deg,#10A37F,#0d8a6a)" },
-  { name: "Claude", slug: "anthropic", bg: "linear-gradient(135deg,#D97757,#c25f3f)" },
+  { name: "Claude", slug: "claude", bg: "linear-gradient(135deg,#D97757,#c25f3f)" },
   { name: "Gemini", slug: "googlegemini", bg: "linear-gradient(135deg,#4285F4,#8E75B2)" },
   { name: "Perplexity", slug: "perplexity", bg: "linear-gradient(135deg,#1FB8CD,#0f8a99)" },
   { name: "DeepSeek", slug: "deepseek", bg: "linear-gradient(135deg,#4D6BFE,#3753d6)" },
@@ -17,11 +17,12 @@ const tools: Tool[] = [
   { name: "Qwen", slug: "alibabacloud", bg: "linear-gradient(135deg,#FF6A00,#e25500)" },
   { name: "Mistral", slug: "mistralai", bg: "linear-gradient(135deg,#FA520F,#FFD800)" },
   { name: "Codex", bg: "linear-gradient(135deg,#1f2937,#0b1220)", initial: "{ }" },
-  { name: "Claude Code", slug: "anthropic", bg: "linear-gradient(135deg,#1a1a1a,#000000)" },
-  { name: "MCP", bg: "linear-gradient(135deg,#7c6dff,#635bff)", initial: "MCP" },
+  { name: "Claude Code", slug: "claude", bg: "linear-gradient(135deg,#1a1a1a,#000000)" },
+  { name: "MCP", slug: "modelcontextprotocol", bg: "linear-gradient(135deg,#7c6dff,#635bff)" },
   { name: "VS Code", slug: "visualstudiocode", bg: "linear-gradient(135deg,#007ACC,#0a4d80)" },
-  { name: "Antigravity", bg: "linear-gradient(135deg,#111827,#000000)", initial: "Ag" },
+  { name: "Antigravity", bg: "linear-gradient(135deg,#4285F4,#0F9D58)" },
 ];
+
 
 const features = [
   { label: "Frontier model fluency", Icon: Zap },
