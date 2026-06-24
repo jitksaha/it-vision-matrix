@@ -28,7 +28,7 @@ export function Industries() {
               style={{ perspective: 1000 }}
             >
               <TiltCard className="aspect-square">
-                <div className="flex h-full w-full flex-col justify-between rounded-2xl glass p-4 transition-colors hover:bg-white/[0.06]">
+                <div className="flex h-full w-full flex-col justify-between rounded-2xl glass p-4 transition-colors hover:bg-secondary">
                   <span className="font-mono text-[10px] tracking-widest text-muted-foreground">
                     {String(i + 1).padStart(2, "0")}
                   </span>
