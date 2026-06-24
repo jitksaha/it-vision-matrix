@@ -190,6 +190,15 @@ export function Hero() {
           ))}
         </motion.div>
       </div>
+
+      {/* Section bottom border — single color, faded edges */}
+      <div
+        className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
+        style={{
+          background:
+            "linear-gradient(to right, transparent 0%, transparent 15%, rgba(11,18,32,0.18) 50%, transparent 85%, transparent 100%)",
+        }}
+      />
     </section>
   );
 }
