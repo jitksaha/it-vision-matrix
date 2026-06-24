@@ -1,29 +1,54 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Nav } from "@/components/site/Nav";
+import { Hero } from "@/components/site/Hero";
+import { CareerTimeline } from "@/components/site/CareerTimeline";
+import { ExpertiseBento } from "@/components/site/ExpertiseBento";
+import { ImpactDashboard } from "@/components/site/ImpactDashboard";
+import { LeadershipQuote } from "@/components/site/LeadershipQuote";
+import { ExperienceShowcase } from "@/components/site/ExperienceShowcase";
+import { AIExpertise } from "@/components/site/AIExpertise";
+import { StrategicFramework } from "@/components/site/StrategicFramework";
+import { Industries } from "@/components/site/Industries";
+import { Education } from "@/components/site/Education";
+import { ThoughtLeadership } from "@/components/site/ThoughtLeadership";
+import { Contact } from "@/components/site/Contact";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Jit Kumar Saha — Business Consultant, Head of Product, AI Strategist" },
+      {
+        name: "description",
+        content:
+          "Building businesses through strategy, products & AI. Jit Kumar Saha is a Business Consultant, Head of Product and AI Strategist helping organizations scale through innovation and digital transformation.",
+      },
+      { property: "og:title", content: "Jit Kumar Saha — Business Leader, Product Executive, AI Strategist" },
+      {
+        property: "og:description",
+        content:
+          "Business consulting, product leadership and AI transformation for modern organizations.",
+      },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="relative bg-background text-foreground">
+      <Nav />
+      <Hero />
+      <CareerTimeline />
+      <ExpertiseBento />
+      <ImpactDashboard />
+      <LeadershipQuote />
+      <ExperienceShowcase />
+      <AIExpertise />
+      <StrategicFramework />
+      <Industries />
+      <Education />
+      <ThoughtLeadership />
+      <Contact />
+    </main>
   );
 }
