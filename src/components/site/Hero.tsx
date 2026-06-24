@@ -2,23 +2,23 @@ import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUp, Sparkles, Home, Users, Pencil, Briefcase } from "lucide-react";
 
-// Words on a deep arc — left arc bulges right (opens right), right arc bulges left.
+// Words on a deep arc with a small colored brand dot — left arc bulges right, right arc bulges left.
 const techArc = [
-  { t: "GraphQL", y: 4, x: 60, r: -28 },
-  { t: "MySQL", y: 20, x: 38, r: -18 },
-  { t: "PostgreSQL", y: 38, x: 22, r: -6 },
-  { t: "MCP", y: 54, x: 22, r: 6 },
-  { t: "OpenAPI", y: 72, x: 38, r: 18 },
-  { t: "LangChain", y: 90, x: 60, r: 28 },
+  { t: "GraphQL", y: 4, x: 58, r: -28, c: "#e10098" },
+  { t: "MySQL", y: 20, x: 36, r: -18, c: "#00758f" },
+  { t: "PostgreSQL", y: 38, x: 20, r: -6, c: "#336791" },
+  { t: "MCP", y: 56, x: 20, r: 6, c: "#000000" },
+  { t: "OpenAPI", y: 74, x: 36, r: 18, c: "#6ba539" },
+  { t: "LangChain", y: 92, x: 58, r: 28, c: "#1c3c3c" },
 ];
 
 const bizArc = [
-  { t: "HTTP API", y: 4, x: 60, r: 28 },
-  { t: "Oracle", y: 20, x: 38, r: 18 },
-  { t: "Snowflake", y: 38, x: 22, r: 6 },
-  { t: "OpenAI", y: 54, x: 22, r: -6 },
-  { t: "MariaDB", y: 72, x: 38, r: -18 },
-  { t: "Strategy", y: 90, x: 60, r: -28 },
+  { t: "HTTP API", y: 4, x: 58, r: 28, c: "#0ea5e9" },
+  { t: "Oracle", y: 20, x: 36, r: 18, c: "#f80000" },
+  { t: "Snowflake", y: 38, x: 20, r: 6, c: "#29b5e8" },
+  { t: "OpenAI", y: 56, x: 20, r: -6, c: "#10a37f" },
+  { t: "MariaDB", y: 74, x: 36, r: -18, c: "#003545" },
+  { t: "Strategy", y: 92, x: 58, r: -28, c: "#8b5cf6" },
 ];
 
 const knowledge: { tags: string[]; answer: string }[] = [
