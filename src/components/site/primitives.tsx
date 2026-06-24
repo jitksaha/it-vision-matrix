@@ -37,8 +37,8 @@ export function MagneticButton({
     "relative inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium tracking-tight transition-colors";
   const styles =
     variant === "primary"
-      ? "text-background bg-white hover:bg-white/90"
-      : "text-foreground glass hover:bg-white/[0.08]";
+      ? "bg-foreground text-background hover:opacity-90 shadow-[0_10px_30px_-12px_rgba(11,18,32,0.45)]"
+      : "text-foreground glass hover:bg-white";
 
   const inner = (
     <motion.div
