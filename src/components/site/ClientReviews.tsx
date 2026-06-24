@@ -40,12 +40,13 @@ const notes: Note[] = [
     author: "Founder, AI startup",
     date: "May 02, 2026",
     tone: "blue",
-    top: "22%",
-    left: "30%",
+    top: "32%",
+    left: "1%",
     rotate: -2,
-    width: "18rem",
+    width: "16rem",
     hideOn: "sm",
   },
+
   {
     q: "Created a Sales CRM with lead tracking, deal stages and a real KPI dashboard in days.",
     date: "Apr 24, 2026",
