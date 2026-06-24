@@ -235,14 +235,20 @@ function SkillColumn({
   const COL_H = ITEM_H * VISIBLE;
   const CENTER = Math.floor(VISIBLE / 2); // slot index of highlight
 
-  const [active, setActive] = useState(0);
+  // `step` only increases — gives a continuous loop. We snap it back by N
+  // (without animation) after the row animation lands on a duplicate slot.
+  const [step, setStep] = useState(0);
+  const [snap, setSnap] = useState(false);
 
   useEffect(() => {
     const id = setInterval(() => {
-      setActive((i) => (i + 1) % skills.length);
+      setSnap(false);
+      setStep((s) => s + 1);
     }, 1800);
     return () => clearInterval(id);
-  }, [skills.length]);
+  }, []);
+
+  
 
   // Duplicate list so the wrap-around looks continuous.
   const loop = [...skills, ...skills];
@@ -252,7 +258,7 @@ function SkillColumn({
       className={`pointer-events-none absolute top-1/2 z-0 hidden -translate-y-1/2 md:block ${
         side === "left" ? "left-4 lg:left-10" : "right-4 lg:right-10"
       }`}
-      style={{ height: COL_H, width: 200 }}
+      style={{ height: COL_H, width: 220 }}
     >
       {/* tiny side label */}
       <div
@@ -268,23 +274,36 @@ function SkillColumn({
         className="absolute inset-0 overflow-hidden"
         style={{
           maskImage:
-            "linear-gradient(to bottom, transparent 0%, #000 25%, #000 75%, transparent 100%)",
+            "linear-gradient(to bottom, transparent 0%, #000 28%, #000 72%, transparent 100%)",
           WebkitMaskImage:
-            "linear-gradient(to bottom, transparent 0%, #000 25%, #000 75%, transparent 100%)",
+            "linear-gradient(to bottom, transparent 0%, #000 28%, #000 72%, transparent 100%)",
         }}
       >
         <motion.ul
-          animate={{ y: CENTER * ITEM_H - active * ITEM_H }}
-          transition={{ type: "spring", stiffness: 120, damping: 22 }}
+          animate={{ y: CENTER * ITEM_H - step * ITEM_H }}
+          transition={snap ? { duration: 0 } : { type: "spring", stiffness: 120, damping: 22 }}
+          onAnimationComplete={() => {
+            if (step >= skills.length) {
+              setSnap(true);
+              setStep((s) => s - skills.length);
+            }
+          }}
           className="absolute inset-x-0 top-0 m-0 list-none p-0"
         >
           {loop.map((s, i) => {
-            const isActive = i % skills.length === active;
+            const isActive = i === step;
             const { Icon } = s;
+            // Gentle parenthesis curve — items farther from the highlighted
+            // row sit closer to page center; the active row sits at the edge.
+            const dist = Math.abs(i - step);
+            const curveX =
+              dist >= 1 && dist <= CENTER
+                ? (side === "left" ? 1 : -1) * (dist * dist * 4 + 2)
+                : 0;
             return (
               <li
                 key={`${s.t}-${i}`}
-                style={{ height: ITEM_H }}
+                style={{ height: ITEM_H, transform: `translateX(${curveX}px)`, transition: "transform 600ms cubic-bezier(0.2,0.8,0.2,1)" }}
                 className={`flex items-center ${
                   side === "left" ? "justify-start pl-3" : "justify-end pr-3"
                 }`}
@@ -316,6 +335,7 @@ function SkillColumn({
           })}
         </motion.ul>
       </div>
+
 
       {/* chevron pointer toward the search card (aligned with highlight row) */}
       <div
