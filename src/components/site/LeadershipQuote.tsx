@@ -26,11 +26,11 @@ export function LeadershipQuote() {
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground">
           Leadership philosophy
         </p>
-        <blockquote className="mt-8 font-display text-3xl font-medium leading-[1.15] tracking-tight sm:text-5xl lg:text-6xl">
+        <blockquote className="mt-8 font-display text-3xl font-medium leading-[1.35] tracking-tight sm:text-5xl lg:text-6xl">
           Technology alone doesn't scale businesses.{" "}
-          <span className="text-muted-foreground">Execution does.</span>{" "}
+          <span className="rounded-sm bg-[#d0d1ff] px-1.5 box-decoration-clone">Execution does.</span>{" "}
           The best companies are built where{" "}
-          <span className="text-gradient">strategy, operations, products and technology</span>{" "}
+          <span className="rounded-sm bg-[#d0d1ff] px-1.5 box-decoration-clone">strategy, operations, products and technology</span>{" "}
           work together.
         </blockquote>
         <p className="mt-10 text-sm tracking-wide text-muted-foreground">— Jit Kumar Saha</p>

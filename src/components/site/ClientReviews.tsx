@@ -146,10 +146,10 @@ export function ClientReviews() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.05 }}
-              className="mt-5 text-3xl font-black leading-[1.05] tracking-[-0.035em] text-foreground sm:text-4xl lg:text-[44px]"
+              className="mt-5 text-3xl font-black leading-[1.35] tracking-[-0.035em] text-foreground sm:text-4xl lg:text-[44px]"
             >
               What clients say after we ship.{" "}
-              <span className="text-muted-foreground">
+              <span className="rounded-sm bg-[#d0d1ff] px-1.5 box-decoration-clone">
                 Real outcomes from real teams — not pull quotes.
               </span>
             </motion.h2>
