@@ -165,10 +165,11 @@
 
 /* Colorful pill chips */
 @utility chip-blue {
-  background: rgba(59, 130, 246, 0.12);
-  color: #1d4ed8;
-  border: 1px solid rgba(59, 130, 246, 0.25);
+  background: rgba(99, 91, 255, 0.12);
+  color: #4f46e5;
+  border: 1px solid rgba(99, 91, 255, 0.25);
 }
+
 @utility chip-violet {
   background: rgba(139, 92, 246, 0.12);
   color: #6d28d9;
