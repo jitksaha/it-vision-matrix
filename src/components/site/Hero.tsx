@@ -2,24 +2,23 @@ import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUp, Sparkles, Home, Users, Pencil, Briefcase } from "lucide-react";
 
-// Words arranged on a curved arc — left arc opens right, right arc opens left.
-// Each word has its own tangent rotation so it follows the curve.
+// Words on a deep arc — left arc bulges right (opens right), right arc bulges left.
 const techArc = [
-  { t: "GraphQL", y: 8, x: 38, r: -22 },
-  { t: "MySQL", y: 22, x: 26, r: -14 },
-  { t: "PostgreSQL", y: 38, x: 18, r: -4 },
-  { t: "MCP", y: 54, x: 22, r: 8 },
-  { t: "OpenAPI", y: 70, x: 30, r: 18 },
-  { t: "LangChain", y: 84, x: 42, r: 26 },
+  { t: "GraphQL", y: 4, x: 60, r: -28 },
+  { t: "MySQL", y: 20, x: 38, r: -18 },
+  { t: "PostgreSQL", y: 38, x: 22, r: -6 },
+  { t: "MCP", y: 54, x: 22, r: 6 },
+  { t: "OpenAPI", y: 72, x: 38, r: 18 },
+  { t: "LangChain", y: 90, x: 60, r: 28 },
 ];
 
 const bizArc = [
-  { t: "HTTP API", y: 8, x: 38, r: 22 },
-  { t: "Oracle", y: 22, x: 26, r: 14 },
-  { t: "Snowflake", y: 38, x: 18, r: 4 },
-  { t: "OpenAI", y: 54, x: 22, r: -8 },
-  { t: "MariaDB", y: 70, x: 30, r: -18 },
-  { t: "Strategy", y: 84, x: 42, r: -26 },
+  { t: "HTTP API", y: 4, x: 60, r: 28 },
+  { t: "Oracle", y: 20, x: 38, r: 18 },
+  { t: "Snowflake", y: 38, x: 22, r: 6 },
+  { t: "OpenAI", y: 54, x: 22, r: -6 },
+  { t: "MariaDB", y: 72, x: 38, r: -18 },
+  { t: "Strategy", y: 90, x: 60, r: -28 },
 ];
 
 const knowledge: { tags: string[]; answer: string }[] = [
@@ -134,27 +133,15 @@ export function Hero() {
             }}
             placeholder="Ask me anything about strategy, product or AI…"
             rows={2}
-            className="block w-full resize-none bg-transparent px-5 pt-4 pb-3 text-base text-foreground placeholder:text-muted-foreground/70 focus:outline-none"
+            className="block w-full resize-none bg-transparent px-5 pt-5 pb-16 text-base text-foreground placeholder:text-muted-foreground/70 focus:outline-none"
           />
-
-          {/* Divider — faded edges, full color center */}
-          <div
-            className="h-px w-full"
-            style={{
-              background:
-                "linear-gradient(to right, transparent 0%, rgba(11,18,32,0.06) 20%, rgba(59,130,246,0.9) 50%, rgba(11,18,32,0.06) 80%, transparent 100%)",
-            }}
-          />
-
-          <div className="flex items-center justify-end px-3 py-2.5">
-            <button
-              type="submit"
-              className="inline-flex items-center gap-1.5 rounded-xl bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90"
-            >
-              Ask Jit
-              <ArrowUp className="h-3.5 w-3.5" />
-            </button>
-          </div>
+          <button
+            type="submit"
+            className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-xl bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90"
+          >
+            Ask Jit
+            <ArrowUp className="h-3.5 w-3.5" />
+          </button>
 
           {submitted && (
             <motion.div
