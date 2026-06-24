@@ -26,7 +26,7 @@ export function CareerTimeline() {
           </span>
           <h2 className="mt-5 text-3xl font-black leading-[1.35] tracking-[-0.035em] text-foreground sm:text-4xl lg:text-[44px]">
             From shipping code to shaping companies.{" "}
-            <span className="rounded-sm bg-[#d0d1ff] px-1.5 text-muted-foreground box-decoration-clone">
+            <span className="rounded-sm bg-[#d0d1ff] px-1.5 box-decoration-clone">
               Eight chapters, 2019 — 2026.
             </span>
           </h2>
