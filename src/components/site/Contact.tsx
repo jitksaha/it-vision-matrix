@@ -29,10 +29,10 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.05 }}
-          className="mt-4 font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
+          className="mt-4 font-display text-5xl font-semibold leading-[1.35] tracking-tight sm:text-6xl lg:text-7xl"
         >
           Let's build the future,{" "}
-          <span className="text-gradient">together.</span>
+          <span className="rounded-sm bg-[#d0d1ff] px-1.5 box-decoration-clone">together.</span>
         </motion.h2>
 
         <motion.p
