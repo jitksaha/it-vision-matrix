@@ -260,14 +260,8 @@ function SkillColumn({
       }`}
       style={{ height: COL_H, width: 220 }}
     >
-      {/* tiny side label */}
-      <div
-        className={`absolute -top-6 text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground/50 ${
-          side === "left" ? "left-2" : "right-2"
-        }`}
-      >
-        {label}
-      </div>
+
+
 
       {/* fade mask top/bottom */}
       <div
