@@ -2,64 +2,34 @@ import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUp, Sparkles, Home, Users, Pencil, Briefcase } from "lucide-react";
 
-// Scattered floating words — left = technology, right = business
-const techWords = [
-  { t: "GraphQL", x: 8, y: 8, r: -8, s: 22 },
-  { t: "MySQL", x: 14, y: 22, r: 4, s: 26 },
-  { t: "PostgreSQL", x: 4, y: 36, r: -6, s: 20 },
-  { t: "MCP", x: 16, y: 50, r: 6, s: 28 },
-  { t: "OpenAPI", x: 6, y: 64, r: -4, s: 22 },
-  { t: "LangChain", x: 12, y: 78, r: 8, s: 20 },
-  { t: "Next.js", x: 2, y: 92, r: -10, s: 18 },
+// Words arranged on a curved arc — left arc opens right, right arc opens left.
+// Each word has its own tangent rotation so it follows the curve.
+const techArc = [
+  { t: "GraphQL", y: 8, x: 38, r: -22 },
+  { t: "MySQL", y: 22, x: 26, r: -14 },
+  { t: "PostgreSQL", y: 38, x: 18, r: -4 },
+  { t: "MCP", y: 54, x: 22, r: 8 },
+  { t: "OpenAPI", y: 70, x: 30, r: 18 },
+  { t: "LangChain", y: 84, x: 42, r: 26 },
 ];
 
-const bizWords = [
-  { t: "HTTP API", x: 8, y: 8, r: 8, s: 22 },
-  { t: "Oracle", x: 4, y: 22, r: -4, s: 26 },
-  { t: "Snowflake", x: 14, y: 36, r: 6, s: 22 },
-  { t: "OpenAI", x: 2, y: 50, r: -8, s: 24 },
-  { t: "MariaDB", x: 12, y: 64, r: 4, s: 20 },
-  { t: "Strategy", x: 6, y: 78, r: -6, s: 22 },
-  { t: "Revenue", x: 16, y: 92, r: 8, s: 18 },
+const bizArc = [
+  { t: "HTTP API", y: 8, x: 38, r: 22 },
+  { t: "Oracle", y: 22, x: 26, r: 14 },
+  { t: "Snowflake", y: 38, x: 18, r: 4 },
+  { t: "OpenAI", y: 54, x: 22, r: -8 },
+  { t: "MariaDB", y: 70, x: 30, r: -18 },
+  { t: "Strategy", y: 84, x: 42, r: -26 },
 ];
 
-// Lightweight knowledge base for the "ask me anything" engine
 const knowledge: { tags: string[]; answer: string }[] = [
-  {
-    tags: ["ai", "ml", "llm", "gpt", "openai", "prompt", "agent", "rag", "automation"],
-    answer:
-      "I lead AI strategy end-to-end — from prompt engineering and LLM integration to AI agents, RAG knowledge systems and production automation woven into real products and operations.",
-  },
-  {
-    tags: ["product", "head of product", "roadmap", "pm", "discovery", "spec"],
-    answer:
-      "As Head of Product, I run discovery → strategy → roadmap → delivery. I've shipped 50+ products across 20+ industries, balancing user research, business goals and engineering velocity.",
-  },
-  {
-    tags: ["business", "consult", "strategy", "growth", "revenue", "gtm", "operations", "scale"],
-    answer:
-      "I work with founders and exec teams as a Business Consultant — sharpening strategy, fixing operations, designing growth engines and turning AI + product bets into measurable revenue.",
-  },
-  {
-    tags: ["experience", "background", "company", "companies", "career", "history", "work"],
-    answer:
-      "6+ years across roles like Head of Product at Dynime Inc, leadership at Pixel Digi Solution and consulting engagements spanning startups, SaaS, fintech, healthcare and e-commerce.",
-  },
-  {
-    tags: ["startup", "founder", "0 to 1", "mvp", "pmf", "seed"],
-    answer:
-      "I help founders go from 0→1 and 1→10 — validating the bet, shipping the smallest thing that proves it, then building the team, product and motion to scale.",
-  },
-  {
-    tags: ["contact", "hire", "work with", "consult", "advisory", "book", "schedule", "email"],
-    answer:
-      "I'm available for advisory and consulting in 2026. Jump to the contact section or email hello@jitkumar.com to start a conversation.",
-  },
-  {
-    tags: ["industry", "industries", "domain", "sector"],
-    answer:
-      "20+ industries served — SaaS, fintech, e-commerce, healthcare, edtech, logistics, real estate, media and AI-native startups.",
-  },
+  { tags: ["ai", "ml", "llm", "gpt", "openai", "prompt", "agent", "rag", "automation"], answer: "I lead AI strategy end-to-end — from prompt engineering and LLM integration to AI agents, RAG knowledge systems and production automation woven into real products and operations." },
+  { tags: ["product", "head of product", "roadmap", "pm", "discovery", "spec"], answer: "As Head of Product, I run discovery → strategy → roadmap → delivery. I've shipped 50+ products across 20+ industries, balancing user research, business goals and engineering velocity." },
+  { tags: ["business", "consult", "strategy", "growth", "revenue", "gtm", "operations", "scale"], answer: "I work with founders and exec teams as a Business Consultant — sharpening strategy, fixing operations, designing growth engines and turning AI + product bets into measurable revenue." },
+  { tags: ["experience", "background", "company", "companies", "career", "history", "work"], answer: "6+ years across roles like Head of Product at Dynime Inc, leadership at Pixel Digi Solution and consulting engagements spanning startups, SaaS, fintech, healthcare and e-commerce." },
+  { tags: ["startup", "founder", "0 to 1", "mvp", "pmf", "seed"], answer: "I help founders go from 0→1 and 1→10 — validating the bet, shipping the smallest thing that proves it, then building the team, product and motion to scale." },
+  { tags: ["contact", "hire", "work with", "consult", "advisory", "book", "schedule", "email"], answer: "I'm available for advisory and consulting in 2026. Email hello@jitkumar.com to start a conversation." },
+  { tags: ["industry", "industries", "domain", "sector"], answer: "20+ industries served — SaaS, fintech, e-commerce, healthcare, edtech, logistics, real estate, media and AI-native startups." },
 ];
 
 function answerFor(q: string): string {
@@ -70,10 +40,10 @@ function answerFor(q: string): string {
     if (score > best.score) best = { score, answer: k.answer };
   }
   if (best.score > 0) return best.answer;
-  return "I focus on business strategy, product leadership and AI — ask about my experience, the industries I've worked in, how I run product, or how I deploy AI in real operations.";
+  return "I focus on business strategy, product leadership and AI — ask about my experience, the industries I've worked in, or how I deploy AI in real operations.";
 }
 
-const suggestions: { label: string; icon: typeof Home; style: string }[] = [
+const suggestions = [
   { label: "AI Strategy", icon: Home, style: "chip-blue" },
   { label: "Product Leadership", icon: Users, style: "chip-emerald" },
   { label: "Business Consulting", icon: Pencil, style: "chip-orange" },
@@ -86,73 +56,76 @@ export function Hero() {
   const reply = useMemo(() => (submitted ? answerFor(submitted) : ""), [submitted]);
 
   function submit(q?: string) {
-    const value = (q ?? query).trim();
-    if (!value) return;
-    setQuery(value);
-    setSubmitted(value);
+    const v = (q ?? query).trim();
+    if (!v) return;
+    setQuery(v);
+    setSubmitted(v);
   }
 
   return (
-    <section id="top" className="relative overflow-hidden pt-36 pb-28">
+    <section
+      id="top"
+      className="relative flex max-h-screen min-h-screen w-full flex-col items-center justify-center overflow-hidden px-6 pt-20"
+    >
       {/* Soft top wash */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 70% 50% at 50% 30%, rgba(59,130,246,0.05), transparent 60%)",
+            "radial-gradient(ellipse 60% 45% at 50% 35%, rgba(59,130,246,0.05), transparent 60%)",
         }}
       />
 
-      {/* Scattered floating words */}
-      <ScatterWords words={techWords} side="left" />
-      <ScatterWords words={bizWords} side="right" />
+      <ArcWords words={techArc} side="left" />
+      <ArcWords words={bizArc} side="right" />
 
-      <div className="relative mx-auto max-w-6xl px-6">
-        {/* Eyebrow pill */}
-        <div className="flex justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
+      <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center">
+        {/* Eyebrow */}
+        <motion.div
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs text-foreground/70 shadow-sm"
+        >
+          <span className="h-1.5 w-1.5 rounded-full bg-foreground" />
+          Jit Kumar Saha · Business · Product · AI
+        </motion.div>
+
+        {/* Headline with gradient borders top/bottom (faded edges) */}
+        <div className="relative mt-6 w-full">
+          <GradientBorder position="top" />
+          <motion.h1
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2.5 rounded-full border border-border bg-card px-5 py-2 text-[13px] text-foreground/80 shadow-sm"
+            transition={{ duration: 0.6, delay: 0.08 }}
+            className="mx-auto max-w-4xl py-5 text-center text-4xl font-black leading-[1.04] tracking-[-0.04em] text-foreground sm:text-5xl lg:text-[64px]"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-foreground" />
-            Jit Kumar Saha · Business · Product · AI
-          </motion.div>
+            Building businesses
+            <br /> that are baked to scale.
+          </motion.h1>
+          <GradientBorder position="bottom" />
         </div>
 
-        {/* Oversized centered headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.08 }}
-          className="mx-auto mt-10 max-w-5xl text-center text-5xl font-black leading-[1.02] tracking-[-0.04em] text-foreground sm:text-6xl lg:text-[92px]"
-        >
-          Building businesses
-          <br /> that are baked to scale.
-        </motion.h1>
-
         <motion.p
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.18 }}
-          className="mx-auto mt-7 max-w-2xl text-center text-base leading-relaxed text-muted-foreground sm:text-lg"
+          transition={{ duration: 0.5, delay: 0.18 }}
+          className="mx-auto mt-4 max-w-xl text-center text-sm leading-relaxed text-muted-foreground sm:text-base"
         >
           Business Consultant, Head of Product and AI Strategist helping teams
-          ship reliable products, real AI and growth engines — without the
-          bottlenecks or fragile prototypes.
+          ship reliable products, real AI and growth engines.
         </motion.p>
 
-        {/* Ask-me-anything prompt card — tall textarea style */}
+        {/* Prompt card */}
         <motion.form
-          initial={{ opacity: 0, y: 18, scale: 0.985 }}
+          initial={{ opacity: 0, y: 14, scale: 0.99 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.28 }}
+          transition={{ duration: 0.6, delay: 0.28 }}
           onSubmit={(e) => {
             e.preventDefault();
             submit();
           }}
-          className="relative mx-auto mt-12 max-w-3xl rounded-3xl border border-border bg-card shadow-[0_40px_80px_-40px_rgba(11,18,32,0.25)]"
+          className="relative mt-6 w-full max-w-2xl rounded-2xl border border-border bg-card shadow-[0_30px_60px_-30px_rgba(11,18,32,0.22)]"
         >
           <textarea
             value={query}
@@ -164,48 +137,46 @@ export function Hero() {
               }
             }}
             placeholder="Ask me anything about strategy, product or AI…"
-            rows={4}
-            className="block w-full resize-none rounded-3xl bg-transparent px-6 pt-6 pb-20 text-lg text-foreground placeholder:text-muted-foreground/70 focus:outline-none"
+            rows={2}
+            className="block w-full resize-none rounded-2xl bg-transparent px-5 pt-4 pb-14 text-base text-foreground placeholder:text-muted-foreground/70 focus:outline-none"
           />
           <button
             type="submit"
-            className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-2xl bg-foreground px-5 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90"
+            className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-xl bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90"
           >
             Ask Jit
-            <ArrowUp className="h-4 w-4" />
+            <ArrowUp className="h-3.5 w-3.5" />
           </button>
 
           {submitted && (
             <motion.div
-              initial={{ opacity: 0, y: 8 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mx-4 mb-4 rounded-2xl border border-border bg-background p-4 text-left"
+              className="mx-3 mb-3 rounded-xl border border-border bg-background p-3 text-left"
             >
-              <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground">
-                <Sparkles className="h-3.5 w-3.5" /> Answer
+              <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-muted-foreground">
+                <Sparkles className="h-3 w-3" /> Answer
               </div>
-              <p className="mt-2 text-sm leading-relaxed text-foreground sm:text-base">
-                {reply}
-              </p>
+              <p className="mt-1 text-sm leading-relaxed text-foreground">{reply}</p>
             </motion.div>
           )}
         </motion.form>
 
-        {/* Suggestion chips with icons */}
+        {/* Chips */}
         <motion.div
-          initial={{ opacity: 0, y: 8 }}
+          initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-6 flex flex-wrap items-center justify-center gap-2.5"
+          transition={{ duration: 0.5, delay: 0.36 }}
+          className="mt-4 flex flex-wrap items-center justify-center gap-2"
         >
           {suggestions.map(({ label, icon: Icon, style }) => (
             <button
               key={label}
               type="button"
               onClick={() => submit(label)}
-              className={`${style} inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-transform hover:-translate-y-0.5`}
+              className={`${style} inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-transform hover:-translate-y-0.5`}
             >
-              <Icon className="h-4 w-4" />
+              <Icon className="h-3.5 w-3.5" />
               {label}
             </button>
           ))}
@@ -215,35 +186,47 @@ export function Hero() {
   );
 }
 
-function ScatterWords({
+function GradientBorder({ position }: { position: "top" | "bottom" }) {
+  return (
+    <div
+      className={`absolute ${position === "top" ? "top-0" : "bottom-0"} left-0 h-px w-full`}
+      style={{
+        background:
+          "linear-gradient(to right, transparent 0%, transparent 15%, rgba(59,130,246,0.35) 35%, rgba(139,92,246,0.4) 50%, rgba(236,72,153,0.35) 65%, transparent 85%, transparent 100%)",
+      }}
+    />
+  );
+}
+
+function ArcWords({
   words,
   side,
 }: {
-  words: { t: string; x: number; y: number; r: number; s: number }[];
+  words: { t: string; x: number; y: number; r: number }[];
   side: "left" | "right";
 }) {
   return (
     <div
-      className={`pointer-events-none absolute top-24 hidden h-[80%] w-[22%] md:block ${
+      className={`pointer-events-none absolute top-20 hidden h-[calc(100%-5rem)] w-[26%] md:block ${
         side === "left" ? "left-0" : "right-0"
       }`}
     >
       {words.map((w, i) => (
         <motion.span
           key={w.t}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: [0, -8, 0] }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, y: [0, -6, 0] }}
           transition={{
             opacity: { duration: 0.8, delay: i * 0.08 },
-            y: { duration: 6 + (i % 3), repeat: Infinity, ease: "easeInOut", delay: i * 0.2 },
+            y: { duration: 6 + (i % 3), repeat: Infinity, ease: "easeInOut", delay: i * 0.25 },
           }}
-          className="absolute font-display font-semibold tracking-tight text-foreground/15 whitespace-nowrap"
+          className="absolute font-display text-base font-semibold tracking-tight whitespace-nowrap"
           style={{
             left: side === "left" ? `${w.x}%` : undefined,
             right: side === "right" ? `${w.x}%` : undefined,
             top: `${w.y}%`,
             transform: `rotate(${w.r}deg)`,
-            fontSize: `${w.s}px`,
+            color: "rgba(11, 18, 32, 0.18)",
           }}
         >
           {w.t}
