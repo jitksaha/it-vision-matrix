@@ -44,15 +44,15 @@ export function TrustedBy() {
       <div className="mt-10 flex w-full justify-center px-6">
         <div className="flex w-full max-w-2xl items-center justify-between gap-4 rounded-2xl border border-border bg-card px-5 py-3 shadow-[0_20px_50px_-30px_rgba(11,18,32,0.2)]">
           <p className="text-sm text-muted-foreground sm:text-base">
-            Trusted by more than{" "}
-            <span className="font-bold text-foreground">100k</span> companies all
-            over the world
+            Partnered with{" "}
+            <span className="font-bold text-foreground">9+ brands</span> across
+            freelance platforms, agencies & SaaS
           </p>
           <a
             href="#contact"
             className="inline-flex items-center gap-1.5 rounded-xl bg-foreground px-4 py-2 text-xs font-medium text-background transition-opacity hover:opacity-90 sm:text-sm"
           >
-            Read their success stories
+            Work with me
             <ArrowUpRight className="h-3.5 w-3.5" />
           </a>
         </div>
