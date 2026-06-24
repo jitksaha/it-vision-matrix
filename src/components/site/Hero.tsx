@@ -248,7 +248,7 @@ function SkillColumn({
     return () => clearInterval(id);
   }, []);
 
-  const active = step % skills.length;
+  
 
   // Duplicate list so the wrap-around looks continuous.
   const loop = [...skills, ...skills];
