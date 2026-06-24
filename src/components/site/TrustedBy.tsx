@@ -31,8 +31,8 @@ export function TrustedBy() {
           {loop.map((name, i) => (
             <span
               key={`${name}-${i}`}
-              className="whitespace-nowrap text-2xl font-black tracking-tight text-foreground/30 transition-colors hover:text-foreground/60 sm:text-3xl"
-              style={{ fontFamily: "var(--font-sans, ui-sans-serif)" }}
+              className="whitespace-nowrap text-4xl italic tracking-tight text-foreground/40 transition-colors hover:text-foreground/70 sm:text-5xl"
+              style={{ fontFamily: "'Instrument Serif', ui-serif, Georgia, serif" }}
             >
               {name}
             </span>
