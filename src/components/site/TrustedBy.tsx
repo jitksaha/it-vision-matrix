@@ -1,16 +1,15 @@
 import { ArrowUpRight } from "lucide-react";
 
 const companies = [
-  "Dynime Inc",
-  "Pixel Digi",
-  "Quantgene",
-  "Grant Thornton",
-  "Zest Dental",
-  "Rhenus Logistics",
-  "Zylo",
-  "UCT",
-  "Snowflake Co",
-  "Northwind",
+  "Upwork",
+  "Fiverr",
+  "Freelancer",
+  "Webleez",
+  "Bluesky",
+  "Vision Ads 360",
+  "Pixel Digi Solution",
+  "Dynime",
+  "DMLC",
 ];
 
 export function TrustedBy() {
