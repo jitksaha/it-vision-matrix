@@ -2,24 +2,23 @@ import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUp, Sparkles, Home, Users, Pencil, Briefcase } from "lucide-react";
 
-// Words arranged on a curved arc — left arc opens right, right arc opens left.
-// Each word has its own tangent rotation so it follows the curve.
+// Words on a deep arc — left arc bulges right (opens right), right arc bulges left.
 const techArc = [
-  { t: "GraphQL", y: 8, x: 38, r: -22 },
-  { t: "MySQL", y: 22, x: 26, r: -14 },
-  { t: "PostgreSQL", y: 38, x: 18, r: -4 },
-  { t: "MCP", y: 54, x: 22, r: 8 },
-  { t: "OpenAPI", y: 70, x: 30, r: 18 },
-  { t: "LangChain", y: 84, x: 42, r: 26 },
+  { t: "GraphQL", y: 4, x: 60, r: -28 },
+  { t: "MySQL", y: 20, x: 38, r: -18 },
+  { t: "PostgreSQL", y: 38, x: 22, r: -6 },
+  { t: "MCP", y: 54, x: 22, r: 6 },
+  { t: "OpenAPI", y: 72, x: 38, r: 18 },
+  { t: "LangChain", y: 90, x: 60, r: 28 },
 ];
 
 const bizArc = [
-  { t: "HTTP API", y: 8, x: 38, r: 22 },
-  { t: "Oracle", y: 22, x: 26, r: 14 },
-  { t: "Snowflake", y: 38, x: 18, r: 4 },
-  { t: "OpenAI", y: 54, x: 22, r: -8 },
-  { t: "MariaDB", y: 70, x: 30, r: -18 },
-  { t: "Strategy", y: 84, x: 42, r: -26 },
+  { t: "HTTP API", y: 4, x: 60, r: 28 },
+  { t: "Oracle", y: 20, x: 38, r: 18 },
+  { t: "Snowflake", y: 38, x: 22, r: 6 },
+  { t: "OpenAI", y: 54, x: 22, r: -6 },
+  { t: "MariaDB", y: 72, x: 38, r: -18 },
+  { t: "Strategy", y: 90, x: 60, r: -28 },
 ];
 
 const knowledge: { tags: string[]; answer: string }[] = [
