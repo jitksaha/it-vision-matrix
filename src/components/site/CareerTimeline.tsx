@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { SectionHeader } from "./SectionHeader";
+import { GitBranch } from "lucide-react";
 
 const SERIF = "'Instrument Serif', ui-serif, Georgia, serif";
 const MONO = "'Geist Mono', ui-monospace, SFMono-Regular, monospace";
@@ -19,14 +19,22 @@ export function CareerTimeline() {
   return (
     <section className="relative py-20">
       <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader
-          eyebrow="Career Evolution"
-          index="02"
-          meta="2019 — 2026"
-          title="From shipping code to shaping companies."
-          accent="shaping companies"
-          description="Eight chapters. One throughline — building things people use and businesses people trust."
-        />
+        <div className="max-w-3xl">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold text-brand">
+            <GitBranch className="h-3.5 w-3.5" />
+            Career Evolution
+          </span>
+          <h2 className="mt-5 text-3xl font-black leading-[1.05] tracking-[-0.035em] text-foreground sm:text-4xl lg:text-[44px]">
+            From shipping code to shaping companies.{" "}
+            <span className="text-muted-foreground">
+              Eight chapters, 2019 — 2026.
+            </span>
+          </h2>
+          <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+            One throughline — building things people use and businesses people trust.
+          </p>
+        </div>
+
 
         {/* Rail */}
         <div className="relative mt-14">
