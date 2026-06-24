@@ -112,10 +112,7 @@ export function AISkills() {
                 Connect
               </span>
               <h2 className="mt-5 text-3xl font-black leading-[1.05] tracking-[-0.035em] text-foreground sm:text-4xl lg:text-[44px]">
-                AI-native by default.{" "}
-                <span className="text-muted-foreground">
-                  13+ models, agents and protocols I deploy in production.
-                </span>
+                AI-native by default. 13+ models, agents and protocols I deploy in production.
               </h2>
               <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
                 From frontier chat models to agentic coding tools and the Model
