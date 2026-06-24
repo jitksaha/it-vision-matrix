@@ -6,101 +6,72 @@ type Note = {
   author?: string;
   date?: string;
   tone: "white" | "blue" | "dark" | "green" | "orange";
-  /** position: top%, left% (or right%) */
-  top: string;
-  left?: string;
-  right?: string;
   rotate: number;
-  width: string;
-  hideOn?: "sm" | "md";
+  /** vertical position within its column, in % */
+  top: string;
+  width?: string;
 };
 
-const notes: Note[] = [
+const leftNotes: Note[] = [
   {
     q: "Jit reshaped our product org in 6 weeks — clearer bets, faster shipping, real accountability.",
     author: "CEO, SaaS scale-up",
     tone: "white",
-    top: "6%",
-    left: "2%",
     rotate: -4,
-    width: "18rem",
-  },
-  {
-    q: "Connect Stripe, automate billing, ship a customer portal — done in one sprint with Jit.",
-    date: "Jun 12, 2026",
-    tone: "orange",
-    top: "4%",
-    right: "3%",
-    rotate: 5,
-    width: "17rem",
-    hideOn: "md",
+    top: "2%",
   },
   {
     q: "He doesn't just advise — he builds the agentic workflow with you, end to end.",
     author: "Founder, AI startup",
     date: "May 02, 2026",
     tone: "blue",
-    top: "22%",
-    left: "30%",
     rotate: -2,
-    width: "18rem",
-    hideOn: "sm",
-  },
-  {
-    q: "Created a Sales CRM with lead tracking, deal stages and a real KPI dashboard in days.",
-    date: "Apr 24, 2026",
-    tone: "dark",
-    top: "20%",
-    right: "1%",
-    rotate: 3,
-    width: "19rem",
+    top: "32%",
   },
   {
     q: "Migrated us from Retool to a clean, scalable internal tool — workflows finally make sense.",
     author: "Head of Ops",
     tone: "white",
-    top: "44%",
-    left: "1%",
-    rotate: -3,
-    width: "17rem",
+    rotate: 3,
+    top: "60%",
   },
   {
-    q: "HubSpot, Stripe, the data warehouse — Jit wired it all together and our revenue ops just works.",
+    q: "0→1 launch in 5 weeks. Strategy, product, GTM — one operator, no theatre.",
+    author: "Founder, B2B SaaS",
     tone: "green",
-    top: "62%",
-    left: "3%",
-    rotate: 4,
-    width: "16rem",
-    hideOn: "md",
+    rotate: -5,
+    top: "84%",
+  },
+];
+
+const rightNotes: Note[] = [
+  {
+    q: "Connect Stripe, automate billing, ship a customer portal — done in one sprint with Jit.",
+    date: "Jun 12, 2026",
+    tone: "orange",
+    rotate: 5,
+    top: "4%",
+  },
+  {
+    q: "Created a Sales CRM with lead tracking, deal stages and a real KPI dashboard in days.",
+    date: "Apr 24, 2026",
+    tone: "dark",
+    rotate: 3,
+    top: "28%",
   },
   {
     q: "Frontier-model fluency, but with a business head on. Rare combo.",
     author: "VP Product, fintech",
     tone: "white",
+    rotate: -3,
     top: "58%",
-    right: "4%",
-    rotate: -5,
-    width: "16rem",
   },
   {
     q: "Built our internal operations dashboard with real-time charts and drill-downs.",
     date: "Mar 18, 2026",
-    tone: "white",
-    top: "78%",
-    right: "12%",
-    rotate: 2,
-    width: "17rem",
-    hideOn: "sm",
-  },
-  {
-    q: "0→1 launch in 5 weeks. Strategy, product, GTM — one operator, no theatre.",
-    author: "Founder, B2B SaaS",
     tone: "blue",
+    rotate: 4,
     top: "82%",
-    left: "22%",
-    rotate: -6,
-    width: "18rem",
-    hideOn: "sm",
   },
 ];
 
@@ -112,99 +83,128 @@ const toneStyles: Record<Note["tone"], string> = {
   orange: "bg-[#ea580c] text-white shadow-[0_18px_40px_-18px_rgba(234,88,12,0.45)]",
 };
 
-const hideClass: Record<NonNullable<Note["hideOn"]>, string> = {
-  sm: "hidden md:block",
-  md: "hidden lg:block",
-};
+function NoteCard({ n, i, align }: { n: Note; i: number; align: "left" | "right" }) {
+  return (
+    <motion.figure
+      initial={{ opacity: 0, y: 20, rotate: 0 }}
+      whileInView={{ opacity: 1, y: 0, rotate: n.rotate }}
+      viewport={{ once: true, margin: "-10%" }}
+      transition={{ duration: 0.55, delay: 0.05 + i * 0.06, ease: "easeOut" }}
+      style={{ top: n.top }}
+      className={`absolute w-[15rem] xl:w-[17rem] ${
+        align === "left" ? "left-0" : "right-0"
+      }`}
+    >
+      {n.date && (
+        <figcaption className="mb-1.5 text-right font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground/70">
+          {n.date}
+        </figcaption>
+      )}
+      <div className={`rounded-lg px-4 py-3 text-[13px] leading-snug ${toneStyles[n.tone]}`}>
+        <p>{n.q}</p>
+        {n.author && (
+          <p
+            className={`mt-2 text-[11px] font-medium ${
+              n.tone === "white" ? "text-muted-foreground" : "text-white/75"
+            }`}
+          >
+            — {n.author}
+          </p>
+        )}
+      </div>
+    </motion.figure>
+  );
+}
 
 export function ClientReviews() {
   return (
     <section id="reviews" className="relative overflow-hidden bg-secondary/30 py-24 sm:py-32">
       <div className="relative mx-auto max-w-7xl px-6">
-        {/* Scattered notes layer */}
-        <div className="pointer-events-none absolute inset-0 hidden sm:block">
-          {notes.map((n, i) => (
-            <motion.figure
-              key={i}
-              initial={{ opacity: 0, y: 20, rotate: 0 }}
-              whileInView={{ opacity: 1, y: 0, rotate: n.rotate }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.6, delay: 0.05 + i * 0.05, ease: "easeOut" }}
-              style={{
-                top: n.top,
-                left: n.left,
-                right: n.right,
-                width: n.width,
-              }}
-              className={`absolute ${n.hideOn ? hideClass[n.hideOn] : ""}`}
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[16rem_1fr_16rem] xl:grid-cols-[18rem_1fr_18rem] lg:gap-8">
+          {/* Left column (desktop) */}
+          <div className="relative hidden h-[760px] lg:block">
+            {leftNotes.map((n, i) => (
+              <NoteCard key={i} n={n} i={i} align="left" />
+            ))}
+          </div>
+
+          {/* Centered content */}
+          <div className="relative flex flex-col items-center justify-center text-center lg:py-16">
+            <motion.span
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className="inline-flex items-center gap-1.5 rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold text-brand"
             >
-              {n.date && (
-                <figcaption className="mb-1.5 text-right font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground/70">
-                  {n.date}
-                </figcaption>
-              )}
-              <div className={`rounded-lg px-4 py-3 text-[13px] leading-snug ${toneStyles[n.tone]}`}>
-                <p>{n.q}</p>
-                {n.author && (
-                  <p className={`mt-2 text-[11px] font-medium ${
-                    n.tone === "white" ? "text-muted-foreground" : "text-white/75"
-                  }`}>
-                    — {n.author}
-                  </p>
-                )}
-              </div>
-            </motion.figure>
-          ))}
+              <MessageSquareQuote className="h-3.5 w-3.5" />
+              Reviews
+            </motion.span>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="mt-5 text-3xl font-black leading-[1.05] tracking-[-0.035em] text-foreground sm:text-4xl lg:text-[42px]"
+            >
+              What clients say after we ship.{" "}
+              <span className="text-muted-foreground">
+                Real outcomes from real teams — not pull quotes.
+              </span>
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="mt-5 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base"
+            >
+              Founders, operators and product leaders I've worked with — on AI bets,
+              product launches, GTM motions and the messy middle in between.
+            </motion.p>
+
+            <motion.a
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              href="#contact"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-transform hover:-translate-y-0.5"
+            >
+              Read more stories
+              <ArrowRight className="h-4 w-4" />
+            </motion.a>
+          </div>
+
+          {/* Right column (desktop) */}
+          <div className="relative hidden h-[760px] lg:block">
+            {rightNotes.map((n, i) => (
+              <NoteCard key={i} n={n} i={i} align="right" />
+            ))}
+          </div>
         </div>
 
-        {/* Centered content */}
-        <div className="relative z-10 mx-auto flex min-h-[640px] max-w-2xl flex-col items-center justify-center text-center sm:min-h-[720px]">
-          <motion.span
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-1.5 rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold text-brand"
-          >
-            <MessageSquareQuote className="h-3.5 w-3.5" />
-            Reviews
-          </motion.span>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.05 }}
-            className="mt-5 text-3xl font-black leading-[1.05] tracking-[-0.035em] text-foreground sm:text-4xl lg:text-[44px]"
-          >
-            What clients say after we ship.{" "}
-            <span className="text-muted-foreground">
-              Real outcomes from real teams — not pull quotes.
-            </span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-5 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base"
-          >
-            Founders, operators and product leaders I've worked with — on AI bets,
-            product launches, GTM motions and the messy middle in between.
-          </motion.p>
-
-          <motion.a
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            href="#contact"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-transform hover:-translate-y-0.5"
-          >
-            Read more stories
-            <ArrowRight className="h-4 w-4" />
-          </motion.a>
+        {/* Mobile / tablet fallback — simple grid of notes below CTA */}
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:hidden">
+          {[...leftNotes, ...rightNotes].slice(0, 6).map((n, i) => (
+            <div key={i} className={`rounded-lg px-4 py-3 text-[13px] leading-snug ${toneStyles[n.tone]}`}>
+              {n.date && (
+                <p className="mb-1 font-mono text-[10px] uppercase tracking-[0.18em] opacity-70">
+                  {n.date}
+                </p>
+              )}
+              <p>{n.q}</p>
+              {n.author && (
+                <p className={`mt-2 text-[11px] font-medium ${
+                  n.tone === "white" ? "text-muted-foreground" : "text-white/75"
+                }`}>
+                  — {n.author}
+                </p>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </section>
