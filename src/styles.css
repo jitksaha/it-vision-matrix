@@ -111,9 +111,10 @@
   }
 
   ::selection {
-    background: rgba(59, 130, 246, 0.25);
+    background: rgba(99, 91, 255, 0.25);
     color: #0b1220;
   }
+
 }
 
 @utility glass {
