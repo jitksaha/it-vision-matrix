@@ -233,9 +233,12 @@ function SkillColumn({
   const COL_H = ITEM_H * VISIBLE;
   const CENTER = Math.floor(VISIBLE / 2); // slot index of highlight
 
-  // `step` only increases — gives a continuous loop. We snap it back by N
-  // (without animation) after the row animation lands on a duplicate slot.
-  const [step, setStep] = useState(0);
+  // Triple the list and start from the middle copy so the visible window is
+  // fully populated on first paint AND we can snap forward/back invisibly.
+  const N = skills.length;
+  const loop = [...skills, ...skills, ...skills];
+
+  const [step, setStep] = useState(N); // start in the middle copy
   const [snap, setSnap] = useState(false);
 
   useEffect(() => {
@@ -245,11 +248,6 @@ function SkillColumn({
     }, 1800);
     return () => clearInterval(id);
   }, []);
-
-  
-
-  // Duplicate list so the wrap-around looks continuous.
-  const loop = [...skills, ...skills];
 
   return (
     <div
