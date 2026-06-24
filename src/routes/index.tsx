@@ -14,6 +14,7 @@ import { StrategicFramework } from "@/components/site/StrategicFramework";
 import { Industries } from "@/components/site/Industries";
 import { Education } from "@/components/site/Education";
 import { ThoughtLeadership } from "@/components/site/ThoughtLeadership";
+import { ClientReviews } from "@/components/site/ClientReviews";
 import { Contact } from "@/components/site/Contact";
 
 export const Route = createFileRoute("/")({
@@ -54,6 +55,7 @@ function Index() {
       <Industries />
       <Education />
       <ThoughtLeadership />
+      <ClientReviews />
       <Contact />
     </main>
   );
