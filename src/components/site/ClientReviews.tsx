@@ -68,8 +68,9 @@ const notes: Note[] = [
   {
     q: "HubSpot, Stripe, the data warehouse — Jit wired it all together and our revenue ops just works.",
     tone: "green",
-    top: "62%",
-    left: "3%",
+    top: "60%",
+    right: "14%",
+
     rotate: 4,
     width: "16rem",
     hideOn: "md",
