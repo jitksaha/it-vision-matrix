@@ -39,6 +39,7 @@ function Index() {
     <main className="relative bg-background text-foreground">
       <Nav />
       <Hero />
+      <TrustedBy />
       <CareerTimeline />
       <ExpertiseBento />
       <ImpactDashboard />
