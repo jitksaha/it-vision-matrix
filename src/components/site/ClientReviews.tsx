@@ -118,7 +118,7 @@ function NoteCard({ n, i, align }: { n: Note; i: number; align: "left" | "right"
 
 export function ClientReviews() {
   return (
-    <section id="reviews" className="relative overflow-hidden bg-secondary/30 py-24 sm:py-32">
+    <section id="reviews" className="relative overflow-hidden py-24 sm:py-32">
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[16rem_1fr_16rem] xl:grid-cols-[18rem_1fr_18rem] lg:gap-8">
           {/* Left column (desktop) */}
