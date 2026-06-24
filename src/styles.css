@@ -44,42 +44,45 @@
 }
 
 :root {
-  --radius: 0.75rem;
+  --radius: 0.875rem;
 
-  /* Dark luxury palette */
-  --background: oklch(0.13 0.012 260);
-  --foreground: oklch(0.985 0.003 247);
-  --card: oklch(0.17 0.014 260);
-  --card-foreground: oklch(0.985 0.003 247);
-  --popover: oklch(0.17 0.014 260);
-  --popover-foreground: oklch(0.985 0.003 247);
-  --primary: oklch(0.985 0.003 247);
-  --primary-foreground: oklch(0.16 0.014 260);
-  --secondary: oklch(0.22 0.018 260);
-  --secondary-foreground: oklch(0.985 0.003 247);
-  --muted: oklch(0.22 0.018 260);
-  --muted-foreground: oklch(0.68 0.025 257);
-  --accent: oklch(0.24 0.02 260);
-  --accent-foreground: oklch(0.985 0.003 247);
-  --destructive: oklch(0.6 0.22 25);
-  --destructive-foreground: oklch(0.985 0.003 247);
-  --border: oklch(1 0 0 / 8%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.7 0.14 250);
+  /* Light "Cloud White" palette */
+  --background: #fafbfc;
+  --foreground: #0b1220;
+  --card: #ffffff;
+  --card-foreground: #0b1220;
+  --popover: #ffffff;
+  --popover-foreground: #0b1220;
+  --primary: #0b1220;
+  --primary-foreground: #ffffff;
+  --secondary: #eef2f7;
+  --secondary-foreground: #0b1220;
+  --muted: #f1f4f9;
+  --muted-foreground: #56627a;
+  --accent: #e8ecf1;
+  --accent-foreground: #0b1220;
+  --destructive: #e11d48;
+  --destructive-foreground: #ffffff;
+  --border: rgba(11, 18, 32, 0.08);
+  --input: rgba(11, 18, 32, 0.12);
+  --ring: #3b82f6;
 
-  --surface: oklch(1 0 0 / 3%);
-  --surface-2: oklch(1 0 0 / 6%);
-  --hairline: oklch(1 0 0 / 10%);
+  --surface: rgba(255, 255, 255, 0.7);
+  --surface-2: rgba(255, 255, 255, 0.92);
+  --hairline: rgba(11, 18, 32, 0.08);
 
-  /* Brand accents — cool electric */
-  --brand: oklch(0.75 0.16 230);     /* cyan-blue */
-  --brand-2: oklch(0.68 0.21 295);   /* violet */
-  --brand-3: oklch(0.82 0.14 195);   /* aqua */
+  /* Bright pill accents (UI-Bakery style) */
+  --brand: #3b82f6;       /* blue */
+  --brand-2: #8b5cf6;     /* violet */
+  --brand-3: #10b981;     /* emerald */
+  --brand-4: #f97316;     /* orange */
+  --brand-5: #ec4899;     /* pink */
 
-  --gradient-brand: linear-gradient(135deg, oklch(0.78 0.16 220), oklch(0.66 0.22 295));
-  --gradient-soft: linear-gradient(180deg, oklch(0.22 0.02 260 / 0.6), oklch(0.13 0.012 260 / 0.2));
-  --glow-brand: 0 0 60px -10px oklch(0.7 0.18 250 / 0.6);
-  --shadow-elevated: 0 20px 60px -20px oklch(0 0 0 / 0.6), 0 0 0 1px oklch(1 0 0 / 0.05);
+  --gradient-brand: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  --gradient-soft: linear-gradient(180deg, #ffffff 0%, #eef2f7 100%);
+  --glow-brand: 0 30px 80px -30px rgba(59, 130, 246, 0.35);
+  --shadow-elevated: 0 1px 0 rgba(11, 18, 32, 0.04), 0 20px 50px -20px rgba(11, 18, 32, 0.18);
+  --shadow-card: 0 1px 0 rgba(11, 18, 32, 0.04), 0 8px 24px -12px rgba(11, 18, 32, 0.12);
 }
 
 @layer base {
@@ -89,7 +92,7 @@
 
   html {
     background-color: var(--color-background);
-    color-scheme: dark;
+    color-scheme: light;
     scroll-behavior: smooth;
   }
 
@@ -103,25 +106,26 @@
 
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
   }
 
   ::selection {
-    background: oklch(0.7 0.18 250 / 0.35);
-    color: white;
+    background: rgba(59, 130, 246, 0.25);
+    color: #0b1220;
   }
 }
 
 @utility glass {
   background: var(--surface);
-  backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(14px) saturate(160%);
   border: 1px solid var(--hairline);
 }
 
 @utility glass-strong {
   background: var(--surface-2);
-  backdrop-filter: blur(28px) saturate(160%);
+  backdrop-filter: blur(22px) saturate(160%);
   border: 1px solid var(--hairline);
+  box-shadow: var(--shadow-card);
 }
 
 @utility text-gradient {
@@ -133,9 +137,16 @@
 
 @utility grid-bg {
   background-image:
-    linear-gradient(to right, oklch(1 0 0 / 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(1 0 0 / 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(11, 18, 32, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(11, 18, 32, 0.06) 1px, transparent 1px);
   background-size: 56px 56px;
+}
+
+@utility grid-bg-dense {
+  background-image:
+    linear-gradient(to right, rgba(11, 18, 32, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(11, 18, 32, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
 @utility radial-fade {
@@ -143,5 +154,36 @@
 }
 
 @utility glow-ring {
-  box-shadow: var(--shadow-elevated), var(--glow-brand);
+  box-shadow: var(--shadow-elevated);
+}
+
+@utility hairline {
+  border: 1px solid var(--hairline);
+}
+
+/* Colorful pill chips */
+@utility chip-blue {
+  background: rgba(59, 130, 246, 0.12);
+  color: #1d4ed8;
+  border: 1px solid rgba(59, 130, 246, 0.25);
+}
+@utility chip-violet {
+  background: rgba(139, 92, 246, 0.12);
+  color: #6d28d9;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+}
+@utility chip-emerald {
+  background: rgba(16, 185, 129, 0.12);
+  color: #047857;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+@utility chip-orange {
+  background: rgba(249, 115, 22, 0.12);
+  color: #c2410c;
+  border: 1px solid rgba(249, 115, 22, 0.25);
+}
+@utility chip-pink {
+  background: rgba(236, 72, 153, 0.12);
+  color: #be185d;
+  border: 1px solid rgba(236, 72, 153, 0.25);
 }
