@@ -133,7 +133,7 @@ export function ExpertiseBento() {
         />
 
         <div className="mt-16 grid auto-rows-[minmax(150px,1fr)] grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-4">
-          {cards.map(({ icon: Icon, t, d, span, feature }, i) => (
+          {cards.map(({ icon: Icon, t, d, span, feature, art }, i) => (
             <motion.div
               key={t}
               initial={{ opacity: 0, y: 16 }}
@@ -157,9 +157,18 @@ export function ExpertiseBento() {
                 }}
               />
 
+              {/* vector motif */}
+              <Art
+                variant={art}
+                className={`right-0 top-1/2 -translate-y-1/2 translate-x-[12%] opacity-70 transition-all duration-500 group-hover:translate-x-[6%] group-hover:opacity-100 ${
+                  feature ? "h-64 w-64" : "h-40 w-40"
+                }`}
+              />
+
               <span className="pointer-events-none absolute right-5 top-5 font-mono text-[10px] tracking-widest text-muted-foreground/60">
                 {String(i + 1).padStart(2, "0")}
               </span>
+
 
               <div className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-background/70 backdrop-blur">
                 <Icon className="h-4.5 w-4.5 text-muted-foreground transition-colors group-hover:text-foreground" />
