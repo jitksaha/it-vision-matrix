@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Calendar, Linkedin, Mail } from "lucide-react";
+import { Linkedin, Mail, MessageCircle } from "lucide-react";
 import { MagneticButton } from "./primitives";
 
 export function Contact() {
