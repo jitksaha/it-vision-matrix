@@ -53,15 +53,15 @@ export function Contact() {
           transition={{ duration: 0.7, delay: 0.15 }}
           className="mt-10 flex flex-wrap justify-center gap-3"
         >
-          <MagneticButton href="mailto:hello@jitkumar.com">
-            <Calendar className="mr-2 h-4 w-4" />
-            Schedule a consultation
+          <MagneticButton href="https://wa.me/8801700000000" >
+            <MessageCircle className="mr-2 h-4 w-4" />
+            Connect on WhatsApp
           </MagneticButton>
-          <MagneticButton href="https://linkedin.com" variant="ghost">
+          <MagneticButton href="https://www.linkedin.com/in/jitksha" variant="ghost">
             <Linkedin className="mr-2 h-4 w-4" />
             Connect on LinkedIn
           </MagneticButton>
-          <MagneticButton href="mailto:hello@jitkumar.com" variant="ghost">
+          <MagneticButton href="mailto:mail.jitsaha@gmail.com" variant="ghost">
             <Mail className="mr-2 h-4 w-4" />
             Email me
           </MagneticButton>
